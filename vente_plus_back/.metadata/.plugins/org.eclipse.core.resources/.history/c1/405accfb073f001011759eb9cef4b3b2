@@ -1,0 +1,5 @@
+package org.ms.gatewayservice.config;
+
+public class JwtDecoderConfig {
+
+}

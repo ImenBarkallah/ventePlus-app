@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="hasShownOverlayPopupBefore" value="true"/>
+	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="false"/>
+		<list key="findhistory">
+			<item value="spring-security-test"/>
+			<item value="spring-boot-starter-oauth2-resource-server"/>
+			<item value="spring-boot-starter-security"/>
+			<item value="spring-cloud-starter-gateway"/>
+			<item value="webf"/>
+			<item value="we"/>
+			<item value="secur"/>
+			<item value="securi"/>
+			<item value="secuti"/>
+			<item value="actua"/>
+			<item value="webflux*"/>
+			<item value="jwt"/>
+		</list>
+	</section>
+</section>

@@ -1,0 +1,30 @@
+package org.ms.gatewayservice.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+public class GatewaySecurityConfig {
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+
+        // Désactive le formulaire de login par défaut (page HTML)
+        http.formLogin().disable();
+
+        // Désactive la création de session (stateless)
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        // Autorise toutes les requêtes (ou bien protège seulement ce que tu veux)
+        http.authorizeRequests()
+            .anyRequest().permitAll();
+
+        return http.build();
+    }
+}

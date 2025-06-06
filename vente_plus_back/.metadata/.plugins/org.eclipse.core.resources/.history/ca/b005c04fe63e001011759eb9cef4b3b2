@@ -1,0 +1,5 @@
+package org.ms.gatewayservice.filters;
+
+public class AuthenticationFilter {
+
+}

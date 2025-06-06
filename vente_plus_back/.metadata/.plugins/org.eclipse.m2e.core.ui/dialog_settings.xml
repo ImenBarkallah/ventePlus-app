@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="C:\Users\barka\DSIR12\VentePlus\vente_plus_back\authentification-service"/>
+			<item value="C:\Users\barka\DSIR12\VentePlus\vente_plus_back\produitservice"/>
+			<item value="C:\Users\barka\DSIR12\VentePlus\vente_plus_back\gatewayservice"/>
+			<item value="C:\Users\barka\DSIR12\VentePlus\vente_plus_back\factureservice"/>
+			<item value="C:\Users\barka\DSIR12\VentePlus\vente_plus_back\eureka-discoveryservice"/>
+			<item value="C:\Users\barka\DSIR12\VentePlus\vente_plus_back\config-service"/>
+			<item value="C:\Users\barka\DSIR12\VentePlus\vente_plus_back\client-service"/>
+			<item value="C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service"/>
+			<item value="C:\Users\barka\DSIR12\VentePlus\vente_plus_back\devis-service"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+</section>

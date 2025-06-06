@@ -1,0 +1,459 @@
+2025-05-24 00:59:53,566 [Worker-5: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is not available. Remote download required.
+2025-05-24 01:06:55,162 [Worker-24: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:devise-service:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\devis-service\pom.xml.
+2025-05-24 01:06:58,194 [Worker-24: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /devis-service/src/main/java
+2025-05-24 01:06:58,197 [Worker-24: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /devis-service/src/main/resources
+2025-05-24 01:06:58,198 [Worker-24: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /devis-service/src/main/resources
+2025-05-24 01:06:58,199 [Worker-24: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /devis-service/src/test/java
+2025-05-24 01:06:58,200 [Worker-24: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /devis-service/src/test/resources
+2025-05-24 01:06:59,357 [Worker-24: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 5 sec
+2025-05-24 01:07:02,820 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-24 01:07:02,820 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-24 01:07:02,832 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\devis-service\src\test\resources
+2025-05-24 01:07:16,450 [Worker-44: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:categorie-service:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\pom.xml.
+2025-05-24 01:07:17,834 [Worker-44: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /categorie-service/src/main/java
+2025-05-24 01:07:17,835 [Worker-44: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /categorie-service/src/main/resources
+2025-05-24 01:07:17,835 [Worker-44: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /categorie-service/src/main/resources
+2025-05-24 01:07:17,836 [Worker-44: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /categorie-service/src/test/java
+2025-05-24 01:07:17,837 [Worker-44: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /categorie-service/src/test/resources
+2025-05-24 01:07:18,667 [Worker-44: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 2 sec
+2025-05-24 01:07:19,454 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-24 01:07:19,455 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-24 01:07:19,465 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-05-24 01:07:35,129 [Worker-44: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:client-service:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\client-service\pom.xml.
+2025-05-24 01:07:36,517 [Worker-44: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /client-service/src/main/java
+2025-05-24 01:07:36,519 [Worker-44: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /client-service/src/main/resources
+2025-05-24 01:07:36,519 [Worker-44: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /client-service/src/main/resources
+2025-05-24 01:07:36,520 [Worker-44: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /client-service/src/test/java
+2025-05-24 01:07:36,521 [Worker-44: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /client-service/src/test/resources
+2025-05-24 01:07:37,511 [Worker-44: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 2 sec
+2025-05-24 01:07:38,216 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-24 01:07:38,216 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-24 01:07:38,222 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-05-24 01:07:50,988 [Worker-24: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:config-service:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\config-service\pom.xml.
+2025-05-24 01:07:51,997 [Worker-24: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /config-service/src/main/java
+2025-05-24 01:07:51,997 [Worker-24: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /config-service/src/main/resources
+2025-05-24 01:07:51,998 [Worker-24: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /config-service/src/main/resources
+2025-05-24 01:07:51,999 [Worker-24: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /config-service/src/test/java
+2025-05-24 01:07:51,999 [Worker-24: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /config-service/src/test/resources
+2025-05-24 01:07:52,383 [Worker-24: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 1 sec
+2025-05-24 01:07:52,788 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-24 01:07:52,800 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-24 01:07:52,805 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-05-24 01:08:20,755 [Worker-43: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:eureka-discoveryservice:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\eureka-discoveryservice\pom.xml.
+2025-05-24 01:08:22,124 [Worker-43: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /eureka-discoveryservice/src/main/java
+2025-05-24 01:08:22,125 [Worker-43: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /eureka-discoveryservice/src/main/resources
+2025-05-24 01:08:22,126 [Worker-43: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /eureka-discoveryservice/src/main/resources
+2025-05-24 01:08:22,126 [Worker-43: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /eureka-discoveryservice/src/test/java
+2025-05-24 01:08:22,127 [Worker-43: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /eureka-discoveryservice/src/test/resources
+2025-05-24 01:08:22,650 [Worker-43: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 2 sec
+2025-05-24 01:08:23,102 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-24 01:08:23,103 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-24 01:08:23,119 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\eureka-discoveryservice\src\test\resources
+2025-05-24 01:08:37,328 [Worker-46: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:factureservice:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\factureservice\factureservice\pom.xml.
+2025-05-24 01:08:38,787 [Worker-46: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /factureservice/src/main/java
+2025-05-24 01:08:38,788 [Worker-46: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /factureservice/src/main/resources
+2025-05-24 01:08:38,789 [Worker-46: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /factureservice/src/main/resources
+2025-05-24 01:08:38,789 [Worker-46: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /factureservice/src/test/java
+2025-05-24 01:08:38,790 [Worker-46: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /factureservice/src/test/resources
+2025-05-24 01:08:39,643 [Worker-46: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 2 sec
+2025-05-24 01:08:40,266 [Worker-43: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-24 01:08:40,267 [Worker-43: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-24 01:08:40,278 [Worker-43: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\factureservice\factureservice\src\test\resources
+2025-05-24 01:08:53,022 [Worker-40: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:gatewayservice:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\gatewayservice\pom.xml.
+2025-05-24 01:08:54,112 [Worker-40: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /gatewayservice/src/main/java
+2025-05-24 01:08:54,113 [Worker-40: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /gatewayservice/src/main/resources
+2025-05-24 01:08:54,113 [Worker-40: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /gatewayservice/src/main/resources
+2025-05-24 01:08:54,114 [Worker-40: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /gatewayservice/src/test/java
+2025-05-24 01:08:54,114 [Worker-40: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /gatewayservice/src/test/resources
+2025-05-24 01:08:54,642 [Worker-40: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 1 sec
+2025-05-24 01:08:55,020 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-24 01:08:55,020 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-24 01:08:55,027 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-05-24 01:09:08,806 [Worker-46: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:produitservice:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\produitservice\pom.xml.
+2025-05-24 01:09:10,289 [Worker-46: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /produitservice/src/main/java
+2025-05-24 01:09:10,290 [Worker-46: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /produitservice/src/main/resources
+2025-05-24 01:09:10,291 [Worker-46: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /produitservice/src/main/resources
+2025-05-24 01:09:10,291 [Worker-46: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /produitservice/src/test/java
+2025-05-24 01:09:10,292 [Worker-46: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /produitservice/src/test/resources
+2025-05-24 01:09:11,315 [Worker-46: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 2 sec
+2025-05-24 01:09:11,974 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-24 01:09:11,975 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-24 01:09:11,981 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\produitservice\src\test\resources
+2025-05-24 11:18:47,884 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-05-27 00:28:16,138 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-05-27 00:28:48,214 [Worker-33: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:categorie-service:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\pom.xml.
+2025-05-27 00:28:54,793 [Worker-33: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-27 00:28:54,793 [Worker-33: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-27 00:28:54,813 [Worker-33: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-05-27 00:28:55,604 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-27 00:28:55,606 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-27 00:28:55,612 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-05-27 00:28:58,022 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-27 00:28:58,022 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-27 00:28:58,040 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-05-27 00:29:01,682 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-27 00:29:01,703 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-27 00:29:01,710 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-05-27 00:29:05,138 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-27 00:29:05,153 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-27 00:29:05,153 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\devis-service\src\test\resources
+2025-05-27 00:29:08,825 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-27 00:29:08,826 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-27 00:29:08,837 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\eureka-discoveryservice\src\test\resources
+2025-05-27 00:29:10,836 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-27 00:29:10,836 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-27 00:29:10,836 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-05-27 00:29:12,908 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-27 00:29:12,908 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-27 00:29:12,920 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\produitservice\src\test\resources
+2025-05-27 00:29:14,388 [Worker-29: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-05-27 00:29:14,388 [Worker-29: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-05-27 00:29:14,404 [Worker-29: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-05-27 13:34:10,127 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-05-27 23:54:18,447 [Worker-5: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-05-29 02:16:26,968 [Worker-5: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-06-01 13:23:21,229 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-06-01 13:31:14,113 [Worker-25: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:authentification-service:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\authentification-service\pom.xml.
+2025-06-01 13:31:17,562 [Worker-25: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /authentification-service/src/main/java
+2025-06-01 13:31:17,566 [Worker-25: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /authentification-service/src/main/resources
+2025-06-01 13:31:17,566 [Worker-25: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /authentification-service/src/main/resources
+2025-06-01 13:31:17,568 [Worker-25: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /authentification-service/src/test/java
+2025-06-01 13:31:17,569 [Worker-25: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /authentification-service/src/test/resources
+2025-06-01 13:31:18,843 [Worker-25: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 5 sec
+2025-06-01 13:31:20,034 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:31:20,035 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:31:20,047 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\authentification-service\src\test\resources
+2025-06-01 13:31:21,564 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:31:21,565 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:31:21,574 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 13:31:22,798 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:31:22,799 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:31:22,806 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:31:25,614 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:31:25,627 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:31:25,631 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:31:28,376 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:31:28,377 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:31:28,387 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\devis-service\src\test\resources
+2025-06-01 13:31:31,653 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:31:31,654 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:31:31,662 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\eureka-discoveryservice\src\test\resources
+2025-06-01 13:31:33,359 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:31:33,360 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:31:33,370 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:31:34,126 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:31:34,127 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:31:34,136 [Worker-40: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\produitservice\src\test\resources
+2025-06-01 13:35:57,392 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:35:57,394 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:35:57,399 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:37:00,464 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:37:00,465 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:37:00,469 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:38:07,715 [Worker-28: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:38:07,716 [Worker-28: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:38:07,719 [Worker-28: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:38:20,242 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:38:20,242 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:38:20,246 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:39:49,124 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:39:49,125 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:39:49,129 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:42:15,646 [Worker-49: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:gatewayservice:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\gatewayservice\pom.xml.
+2025-06-01 13:42:16,840 [Worker-49: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.pom
+2025-06-01 13:42:16,852 [Worker-49: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.pom
+2025-06-01 13:42:17,028 [Worker-49: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.pom
+2025-06-01 13:42:17,042 [Worker-49: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.pom
+2025-06-01 13:42:17,232 [Worker-49: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.pom
+2025-06-01 13:42:17,238 [Worker-49: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.pom
+2025-06-01 13:42:17,364 [Worker-49: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.pom
+2025-06-01 13:42:17,367 [Worker-49: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.pom
+2025-06-01 13:42:17,438 [Worker-49: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.pom
+2025-06-01 13:42:17,444 [Worker-49: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.pom
+2025-06-01 13:42:17,739 [Worker-49: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.jar
+2025-06-01 13:42:17,747 [Worker-49: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.jar
+2025-06-01 13:42:17,820 [BasicRepositoryConnector-repo.maven.apache.org-0-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.jar
+2025-06-01 13:42:18,116 [BasicRepositoryConnector-repo.maven.apache.org-0-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.jar
+2025-06-01 13:42:18,151 [BasicRepositoryConnector-repo.maven.apache.org-0-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.jar
+2025-06-01 13:42:18,227 [BasicRepositoryConnector-repo.maven.apache.org-0-3] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.jar
+2025-06-01 13:42:18,737 [BasicRepositoryConnector-repo.maven.apache.org-0-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.jar
+2025-06-01 13:42:20,530 [BasicRepositoryConnector-repo.maven.apache.org-0-3] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.jar
+2025-06-01 13:42:20,640 [BasicRepositoryConnector-repo.maven.apache.org-0-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.jar
+2025-06-01 13:42:23,069 [BasicRepositoryConnector-repo.maven.apache.org-0-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.jar
+2025-06-01 13:42:23,772 [Worker-49: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:42:23,773 [Worker-49: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:42:23,777 [Worker-49: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:42:24,139 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:42:24,140 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:42:24,148 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:42:24,934 [Worker-46: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4-sources.jar
+2025-06-01 13:42:24,941 [Worker-46: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4-sources.jar
+2025-06-01 13:42:24,945 [Worker-46: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework.boot:spring-boot-starter-security:3.4.4
+2025-06-01 13:42:25,166 [Worker-46: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4-sources.jar
+2025-06-01 13:42:26,649 [Worker-46: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4-sources.jar
+2025-06-01 13:42:26,652 [Worker-46: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework.security:spring-security-config:6.4.4
+2025-06-01 13:42:27,155 [Worker-46: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4-sources.jar
+2025-06-01 13:42:27,993 [Worker-46: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4-sources.jar
+2025-06-01 13:42:27,997 [Worker-46: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework.security:spring-security-web:6.4.4
+2025-06-01 13:42:28,369 [Worker-46: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4-sources.jar
+2025-06-01 13:42:28,444 [Worker-46: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4-sources.jar
+2025-06-01 13:42:28,447 [Worker-46: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework.security:spring-security-test:6.4.4
+2025-06-01 13:42:28,654 [Worker-46: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4-sources.jar
+2025-06-01 13:42:29,276 [Worker-46: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4-sources.jar
+2025-06-01 13:42:29,279 [Worker-46: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework.security:spring-security-core:6.4.4
+2025-06-01 13:43:36,981 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:43:36,981 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:43:36,985 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:44:48,705 [Worker-46: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:gatewayservice:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\gatewayservice\pom.xml.
+2025-06-01 13:44:49,310 [Worker-46: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/jsonwebtoken/jjwt/0.9.1/jjwt-0.9.1.pom
+2025-06-01 13:44:49,330 [Worker-46: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/jsonwebtoken/jjwt/0.9.1/jjwt-0.9.1.pom
+2025-06-01 13:44:49,605 [Worker-46: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/jsonwebtoken/jjwt/0.9.1/jjwt-0.9.1.jar
+2025-06-01 13:44:49,726 [Worker-46: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/jsonwebtoken/jjwt/0.9.1/jjwt-0.9.1.jar
+2025-06-01 13:44:50,323 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:44:50,324 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:44:50,327 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:44:50,635 [Worker-28: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:44:50,635 [Worker-28: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:44:50,641 [Worker-28: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:44:51,647 [Worker-52: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/io/jsonwebtoken/jjwt/0.9.1/jjwt-0.9.1-sources.jar
+2025-06-01 13:44:51,778 [Worker-52: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/io/jsonwebtoken/jjwt/0.9.1/jjwt-0.9.1-sources.jar
+2025-06-01 13:44:51,782 [Worker-52: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for io.jsonwebtoken:jjwt:0.9.1
+2025-06-01 13:44:54,818 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:44:54,818 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:44:54,821 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:45:13,069 [Worker-53: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:45:13,069 [Worker-53: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:45:13,072 [Worker-53: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:45:35,159 [Worker-51: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:45:35,160 [Worker-51: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:45:35,164 [Worker-51: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:48:51,299 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:48:51,300 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:48:51,303 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 13:51:45,898 [Worker-50: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:categorie-service:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\pom.xml.
+2025-06-01 13:51:47,771 [Worker-50: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:51:47,772 [Worker-50: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:51:47,779 [Worker-50: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 13:51:48,153 [Worker-50: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:51:48,155 [Worker-50: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:51:48,161 [Worker-50: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 13:52:17,755 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:52:17,756 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:52:17,759 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 13:52:24,766 [Worker-50: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:52:24,768 [Worker-50: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:52:24,772 [Worker-50: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 13:52:40,838 [Worker-55: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:52:40,839 [Worker-55: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:52:40,842 [Worker-55: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 13:52:49,345 [Worker-55: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:52:49,346 [Worker-55: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:52:49,349 [Worker-55: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 13:53:06,766 [Worker-56: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:53:06,767 [Worker-56: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:53:06,770 [Worker-56: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 13:53:36,764 [Worker-53: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:53:36,765 [Worker-53: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:53:36,767 [Worker-53: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 13:53:51,097 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:53:51,098 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:53:51,100 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 13:53:56,374 [Worker-55: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:53:56,374 [Worker-55: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:53:56,377 [Worker-55: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 13:55:01,725 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:55:01,726 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:55:01,729 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 13:55:26,569 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:55:26,570 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:55:26,572 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 13:55:35,675 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:55:35,676 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:55:35,679 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 13:58:05,307 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-12.0.15; built: 2024-11-05T19:44:57.623Z; git: 8281ae9740d4b4225e8166cc476bad237c70213a; jvm 23.0.2+7
+2025-06-01 13:58:05,399 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started oeje8n.ContextHandler$CoreContextHandler@1a794948{/help,/help,b=null,a=AVAILABLE,h=oeje8n.ContextHandler$CoreContextHandler$CoreToNestedHandler@39ecab60{STARTED}}
+2025-06-01 13:58:05,400 [Start Help Server] INFO  o.e.j.s.DefaultSessionIdManager - Session workerName=node0
+2025-06-01 13:58:05,436 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@50535be3{HTTP/1.1, (http/1.1)}{127.0.0.1:53240}
+2025-06-01 13:58:05,460 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started oejs.Server@41c95bfd{STARTING}[12.0.15,sto=0] @2095564ms
+2025-06-01 13:58:12,012 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 13:58:12,013 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 13:58:12,016 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 14:05:11,429 [Worker-61: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 14:05:11,431 [Worker-61: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 14:05:11,436 [Worker-61: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\authentification-service\src\test\resources
+2025-06-01 14:12:51,705 [Worker-61: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 14:12:51,706 [Worker-61: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 14:12:51,708 [Worker-61: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\authentification-service\src\test\resources
+2025-06-01 14:19:24,877 [Worker-60: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 14:19:24,878 [Worker-60: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 14:19:24,881 [Worker-60: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 14:57:22,484 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 14:57:22,485 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 14:57:22,489 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 14:59:06,732 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 14:59:06,733 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 14:59:06,737 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\categorie-service\src\test\resources
+2025-06-01 15:01:04,416 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 15:01:04,418 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 15:01:04,421 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 15:01:07,501 [Worker-55: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 15:01:07,501 [Worker-55: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 15:01:07,506 [Worker-55: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 15:11:40,205 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 15:11:40,206 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 15:11:40,210 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 15:11:43,701 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 15:11:43,701 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 15:11:43,704 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 16:35:51,111 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 16:35:51,111 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 16:35:51,114 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 16:42:21,777 [Worker-62: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 16:42:21,778 [Worker-62: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 16:42:21,780 [Worker-62: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 16:43:18,486 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 16:43:18,487 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 16:43:18,490 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 16:49:40,525 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 16:49:40,526 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 16:49:40,531 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\barka\DSIR12\VentePlus\vente_plus_back\authentification-service\src\test\resources
+2025-06-01 16:53:03,234 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 16:53:03,235 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 16:53:03,239 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 16:53:51,561 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 16:53:51,561 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 16:53:51,565 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 16:56:47,295 [Worker-62: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:gatewayservice:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\gatewayservice\pom.xml.
+2025-06-01 16:56:48,960 [Worker-62: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 16:56:48,961 [Worker-62: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 16:56:48,967 [Worker-62: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 16:56:49,318 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 16:56:49,319 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 16:56:49,325 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 16:58:47,574 [Worker-59: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:gatewayservice:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\gatewayservice\pom.xml.
+2025-06-01 16:58:48,742 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 16:58:48,743 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 16:58:48,748 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 16:58:49,986 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 16:58:49,986 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 16:58:49,994 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:00:19,804 [Worker-66: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:gatewayservice:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\gatewayservice\pom.xml.
+2025-06-01 17:00:21,000 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:00:21,001 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:00:21,006 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:00:21,270 [Worker-62: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:00:21,270 [Worker-62: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 17:00:21,276 [Worker-62: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:01:20,385 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:01:20,387 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 17:01:20,390 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:01:48,454 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:01:48,454 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 17:01:48,457 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:13:06,569 [Worker-58: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:13:06,570 [Worker-58: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 17:13:06,573 [Worker-58: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:17:43,235 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:17:43,235 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 17:17:43,250 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:23:23,836 [Worker-62: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:23:23,837 [Worker-62: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 17:23:23,841 [Worker-62: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:23:32,985 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:23:32,985 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 17:23:32,987 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:31:27,794 [Worker-60: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:31:27,795 [Worker-60: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 17:31:27,798 [Worker-60: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:33:27,314 [Worker-59: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:gatewayservice:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\gatewayservice\pom.xml.
+2025-06-01 17:33:28,452 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:33:28,453 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:33:28,457 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:33:28,737 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:33:28,737 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 17:33:28,743 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:36:34,875 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:36:34,876 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 17:36:34,891 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:43:20,299 [Worker-67: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:gatewayservice:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\gatewayservice\pom.xml.
+2025-06-01 17:43:20,998 [Worker-67: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-oauth2-resource-server/3.4.4/spring-boot-starter-oauth2-resource-server-3.4.4.pom
+2025-06-01 17:43:21,004 [Worker-67: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-oauth2-resource-server/3.4.4/spring-boot-starter-oauth2-resource-server-3.4.4.pom
+2025-06-01 17:43:21,084 [Worker-67: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-resource-server/6.4.4/spring-security-oauth2-resource-server-6.4.4.pom
+2025-06-01 17:43:21,089 [Worker-67: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-resource-server/6.4.4/spring-security-oauth2-resource-server-6.4.4.pom
+2025-06-01 17:43:21,167 [Worker-67: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-core/6.4.4/spring-security-oauth2-core-6.4.4.pom
+2025-06-01 17:43:21,172 [Worker-67: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-core/6.4.4/spring-security-oauth2-core-6.4.4.pom
+2025-06-01 17:43:21,249 [Worker-67: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-jose/6.4.4/spring-security-oauth2-jose-6.4.4.pom
+2025-06-01 17:43:21,252 [Worker-67: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-jose/6.4.4/spring-security-oauth2-jose-6.4.4.pom
+2025-06-01 17:43:21,328 [Worker-67: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/com/nimbusds/nimbus-jose-jwt/9.37.3/nimbus-jose-jwt-9.37.3.pom
+2025-06-01 17:43:21,346 [Worker-67: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/com/nimbusds/nimbus-jose-jwt/9.37.3/nimbus-jose-jwt-9.37.3.pom
+2025-06-01 17:43:21,431 [Worker-67: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.pom
+2025-06-01 17:43:21,437 [Worker-67: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.pom
+2025-06-01 17:43:21,729 [Worker-67: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-oauth2-resource-server/3.4.4/spring-boot-starter-oauth2-resource-server-3.4.4.jar
+2025-06-01 17:43:21,734 [Worker-67: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-oauth2-resource-server/3.4.4/spring-boot-starter-oauth2-resource-server-3.4.4.jar
+2025-06-01 17:43:21,808 [BasicRepositoryConnector-repo.maven.apache.org-1-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-resource-server/6.4.4/spring-security-oauth2-resource-server-6.4.4.jar
+2025-06-01 17:43:22,038 [BasicRepositoryConnector-repo.maven.apache.org-1-4] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar
+2025-06-01 17:43:22,044 [BasicRepositoryConnector-repo.maven.apache.org-1-4] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar
+2025-06-01 17:43:22,045 [BasicRepositoryConnector-repo.maven.apache.org-1-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-resource-server/6.4.4/spring-security-oauth2-resource-server-6.4.4.jar
+2025-06-01 17:43:22,080 [BasicRepositoryConnector-repo.maven.apache.org-1-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-core/6.4.4/spring-security-oauth2-core-6.4.4.jar
+2025-06-01 17:43:22,110 [BasicRepositoryConnector-repo.maven.apache.org-1-3] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/com/nimbusds/nimbus-jose-jwt/9.37.3/nimbus-jose-jwt-9.37.3.jar
+2025-06-01 17:43:22,148 [BasicRepositoryConnector-repo.maven.apache.org-1-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-jose/6.4.4/spring-security-oauth2-jose-6.4.4.jar
+2025-06-01 17:43:22,297 [BasicRepositoryConnector-repo.maven.apache.org-1-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-core/6.4.4/spring-security-oauth2-core-6.4.4.jar
+2025-06-01 17:43:22,493 [BasicRepositoryConnector-repo.maven.apache.org-1-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-jose/6.4.4/spring-security-oauth2-jose-6.4.4.jar
+2025-06-01 17:43:23,291 [BasicRepositoryConnector-repo.maven.apache.org-1-3] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/com/nimbusds/nimbus-jose-jwt/9.37.3/nimbus-jose-jwt-9.37.3.jar
+2025-06-01 17:43:23,941 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:43:23,942 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:43:23,946 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:43:24,294 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:43:24,294 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 17:43:24,300 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:43:25,056 [Worker-58: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-oauth2-resource-server/3.4.4/spring-boot-starter-oauth2-resource-server-3.4.4-sources.jar
+2025-06-01 17:43:25,062 [Worker-58: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-oauth2-resource-server/3.4.4/spring-boot-starter-oauth2-resource-server-3.4.4-sources.jar
+2025-06-01 17:43:25,065 [Worker-58: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.4.4
+2025-06-01 17:43:25,292 [Worker-58: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-resource-server/6.4.4/spring-security-oauth2-resource-server-6.4.4-sources.jar
+2025-06-01 17:43:25,393 [Worker-58: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-resource-server/6.4.4/spring-security-oauth2-resource-server-6.4.4-sources.jar
+2025-06-01 17:43:25,396 [Worker-58: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework.security:spring-security-oauth2-resource-server:6.4.4
+2025-06-01 17:43:25,504 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:43:25,504 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 17:43:25,508 [Worker-52: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:43:25,626 [Worker-58: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-core/6.4.4/spring-security-oauth2-core-6.4.4-sources.jar
+2025-06-01 17:43:25,741 [Worker-58: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-core/6.4.4/spring-security-oauth2-core-6.4.4-sources.jar
+2025-06-01 17:43:25,744 [Worker-58: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework.security:spring-security-oauth2-core:6.4.4
+2025-06-01 17:43:25,960 [Worker-58: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-jose/6.4.4/spring-security-oauth2-jose-6.4.4-sources.jar
+2025-06-01 17:43:26,051 [Worker-58: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-jose/6.4.4/spring-security-oauth2-jose-6.4.4-sources.jar
+2025-06-01 17:43:26,054 [Worker-58: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.springframework.security:spring-security-oauth2-jose:6.4.4
+2025-06-01 17:43:26,267 [Worker-58: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/com/nimbusds/nimbus-jose-jwt/9.37.3/nimbus-jose-jwt-9.37.3-sources.jar
+2025-06-01 17:43:26,773 [Worker-58: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/com/nimbusds/nimbus-jose-jwt/9.37.3/nimbus-jose-jwt-9.37.3-sources.jar
+2025-06-01 17:43:26,776 [Worker-58: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for com.nimbusds:nimbus-jose-jwt:9.37.3
+2025-06-01 17:43:27,062 [Worker-58: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1-sources.jar
+2025-06-01 17:43:27,068 [Worker-58: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1-sources.jar
+2025-06-01 17:43:27,072 [Worker-58: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for com.github.stephenc.jcip:jcip-annotations:1.0-1
+2025-06-01 17:43:38,170 [Worker-58: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:43:38,171 [Worker-58: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 17:43:38,173 [Worker-58: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:43:42,138 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:43:42,139 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 17:43:42,141 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:46:05,807 [Worker-65: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:46:05,808 [Worker-65: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 17:46:05,814 [Worker-65: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 17:46:37,203 [Worker-58: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 17:46:37,203 [Worker-58: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 17:46:37,207 [Worker-58: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 18:14:11,256 [Worker-68: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.ms:gatewayservice:0.0.1-SNAPSHOT @ C:\Users\barka\DSIR12\VentePlus\vente_plus_back\gatewayservice\pom.xml.
+2025-06-01 18:14:12,638 [Worker-68: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 18:14:12,638 [Worker-68: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 18:14:12,645 [Worker-68: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 18:14:13,901 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 18:14:13,902 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 18:14:13,910 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 18:14:15,931 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 18:14:15,932 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 18:14:15,934 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 18:14:31,489 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 18:14:31,489 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 18:14:31,492 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 18:18:11,853 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-06-01 18:18:11,854 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-06-01 18:18:11,858 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-06-01 18:19:34,497 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@41c95bfd{STOPPING}[12.0.15,sto=0]
+2025-06-01 18:19:34,503 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@50535be3{HTTP/1.1, (http/1.1)}{127.0.0.1:0}

@@ -1,0 +1,15 @@
+package org.ms.categorie_service.config;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http.csrf().disable()
+      .authorizeRequests()
+      .anyRequest().authenticated()  // Toutes les requêtes doivent être authentifiées
+      .and()
+      .oauth2ResourceServer().jwt(); // Spring valide automatiquement le JWT
+  }
+}

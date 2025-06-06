@@ -1,0 +1,5 @@
+package org.ms.categorie_service.config;
+
+public class SecurityConfig {
+
+}
