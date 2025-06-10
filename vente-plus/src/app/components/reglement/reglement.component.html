@@ -1,0 +1,708 @@
+<!-- Alerte animée -->
+<div *ngIf="error" class="alert alert-error" (click)="clearError()">
+  <i class="fa-solid fa-exclamation-triangle"></i>
+  {{ error }}
+</div>
+
+<div class="reglement-container">
+  <!-- Reglement Header -->
+  <div class="header">
+    <div class="header-left">
+      <h2>
+        <i class="fa-solid fa-credit-card"></i>
+        Gestion des Règlements
+      </h2>
+      <p class="subtitle">Gérez les paiements et règlements de vos factures</p>
+    </div>
+    <div class="header-actions">
+      <button class="export-pdf-btn" (click)="exportToPdf()" title="Exporter en PDF">
+        <i class="fas fa-file-pdf"></i>
+        <span>PDF</span>
+      </button>
+      <button class="export-excel-btn" (click)="exportToExcel()" title="Exporter en Excel">
+        <i class="fas fa-file-excel"></i>
+        <span>Excel</span>
+      </button>
+      <button class="add-button" (click)="openCreateModal()" title="Nouveau Règlement">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-spinner">
+      <i class="fa-solid fa-spinner fa-spin"></i>
+    </div>
+    <p>Chargement des règlements...</p>
+  </div>
+
+<!-- Reglement Content -->
+<div *ngIf="!loading && !error">
+
+  <!-- Enhanced Stats Dashboard -->
+  <div class="stats-dashboard">
+    <!-- Primary Stats Row -->
+    <div class="stats-container">
+      <!-- Total Payments Card -->
+      <div class="stat-card payments-card" (click)="filterByPaymentStatus('all')">
+        <div class="stat-icon payments-icon">
+          <i class="fa-solid fa-coins"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ formatCurrency(totalPayments) }}</h3>
+          <p>Total Règlements</p>
+          <div class="stat-trend">
+            <i class="fa-solid fa-arrow-up trend-up"></i>
+            <span>+{{ getMonthlyGrowth() }}%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paid Invoices Card -->
+      <div class="stat-card paid-card" (click)="filterByPaymentStatus('paid')">
+        <div class="stat-icon paid-icon">
+          <i class="fa-solid fa-check-circle"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ paidInvoices.length }}</h3>
+          <p>Factures Payées</p>
+          <div class="stat-percentage">
+            {{ getPaymentPercentage('paid') }}% du total
+          </div>
+        </div>
+      </div>
+
+      <!-- Unpaid Invoices Card -->
+      <div class="stat-card unpaid-card" (click)="filterByPaymentStatus('unpaid')">
+        <div class="stat-icon unpaid-icon">
+          <i class="fa-solid fa-exclamation-triangle"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ unpaidInvoices.length }}</h3>
+          <p>Factures Impayées</p>
+          <div class="stat-amount">
+            {{ formatCurrency(getUnpaidAmount()) }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Partial Payments Card -->
+      <div class="stat-card partial-card" (click)="filterByPaymentStatus('partial')">
+        <div class="stat-icon partial-icon">
+          <i class="fa-solid fa-clock"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ partialInvoices.length }}</h3>
+          <p>Paiements Partiels</p>
+          <div class="stat-amount">
+            {{ formatCurrency(getPartialAmount()) }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Average Payment Card -->
+      <div class="stat-card average-card">
+        <div class="stat-icon average-icon">
+          <i class="fas fa-chart-bar"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ formatCurrency(getAveragePayment()) }}</h3>
+          <p>Paiement Moyen</p>
+          <div class="stat-trend">
+            <i class="fas fa-calculator"></i>
+            <span>{{ reglements.length }} règlements</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- This Month Card -->
+      <div class="stat-card month-card">
+        <div class="stat-icon month-icon">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ formatCurrency(getThisMonthPayments()) }}</h3>
+          <p>Ce Mois</p>
+          <div class="stat-trend">
+            <i class="fas fa-calendar-alt"></i>
+            <span>{{ getCurrentMonthName() }} - {{ getThisMonthCount() }} paiements</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Methods Breakdown -->
+    <div class="payment-methods-breakdown">
+      <h4>
+        <i class="fa-solid fa-chart-pie"></i>
+        Répartition par Mode de Paiement
+      </h4>
+      <div class="methods-grid">
+        <div *ngFor="let method of getPaymentMethodsStats()"
+             class="method-stat"
+             [ngClass]="'method-' + method.mode.toLowerCase()"
+             (click)="filterByPaymentMode(method.mode)">
+          <div class="method-icon">
+            <i [class]="getPaymentModeIcon(method.mode)"></i>
+          </div>
+          <div class="method-info">
+            <h5>{{ formatPaymentMode(method.mode) }}</h5>
+            <div class="method-amount">{{ formatCurrency(method.amount) }}</div>
+            <div class="method-count">{{ method.count }} paiements</div>
+            <div class="method-percentage">{{ method.percentage }}%</div>
+          </div>
+          <div class="method-bar">
+            <div class="method-progress" [style.width.%]="method.percentage"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Filters Section -->
+  <div class="filters-container">
+    <div class="filters-header">
+      <div class="filters-title">
+        <h3>
+          <i class="fa-solid fa-filter"></i>
+          Filtres & Recherche
+        </h3>
+        <div class="filters-toggle" (click)="toggleFilters()">
+          <i [class]="filtersExpanded ? 'fa-solid fa-chevron-up' : 'fa-solid fa-chevron-down'"></i>
+        </div>
+      </div>
+      <div class="filter-status" *ngIf="currentFilter !== 'all'">
+        <span class="active-filter">{{ getFilterLabel() }}</span>
+        <button class="clear-filter-btn" (click)="clearActiveFilter()" title="Supprimer le filtre">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="filters-body" [class.expanded]="filtersExpanded">
+      <!-- Search Bar - Full Width -->
+      <div class="filter-row search-row">
+        <div class="filter-group search-group">
+          <label for="searchTerm">
+            <i class="fa-solid fa-search"></i>
+            Recherche Globale
+          </label>
+          <div class="search-input-container">
+            <input type="text"
+                   id="searchTerm"
+                   [(ngModel)]="searchTerm"
+                   (ngModelChange)="onSearchChange()"
+                   placeholder="Rechercher par numéro, référence, client..."
+                   class="search-input">
+            <button *ngIf="searchTerm"
+                    class="clear-search-btn"
+                    (click)="clearSearch()"
+                    title="Effacer la recherche">
+              <i class="fa-solid fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter Row 1 -->
+      <div class="filter-row">
+        <!-- Amount Range Filter -->
+        <div class="filter-group range-group">
+          <label>
+            <i class="fa-solid fa-coins"></i>
+            Montant
+          </label>
+          <div class="range-inputs">
+            <input type="number"
+                   [(ngModel)]="minAmount"
+                   (ngModelChange)="applyFilters()"
+                   placeholder="Min"
+                   class="range-input">
+            <span class="range-separator">-</span>
+            <input type="number"
+                   [(ngModel)]="maxAmount"
+                   (ngModelChange)="applyFilters()"
+                   placeholder="Max"
+                   class="range-input">
+          </div>
+        </div>
+
+        <!-- Date Range Filter -->
+        <div class="filter-group date-group">
+          <label>
+            <i class="fa-solid fa-calendar"></i>
+            Période
+          </label>
+          <div class="date-inputs">
+            <input type="date"
+                   [(ngModel)]="startDate"
+                   (ngModelChange)="applyFilters()"
+                   class="date-input"
+                   title="Date de début">
+            <span class="date-separator">à</span>
+            <input type="date"
+                   [(ngModel)]="endDate"
+                   (ngModelChange)="applyFilters()"
+                   class="date-input"
+                   title="Date de fin">
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter Row 2 -->
+      <div class="filter-row">
+        <!-- Client Filter -->
+        <div class="filter-group">
+          <label for="filterClient">
+            <i class="fa-solid fa-user"></i>
+            Client
+          </label>
+          <select id="filterClient" [(ngModel)]="selectedClientId" (change)="applyFilters()" class="filter-select">
+            <option value="">Tous les clients</option>
+            <option *ngFor="let client of clients" [value]="client.id">
+              {{ client.prenom }} {{ client.nom }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Payment Mode Filter -->
+        <div class="filter-group">
+          <label for="filterMode">
+            <i class="fa-solid fa-credit-card"></i>
+            Mode de Paiement
+          </label>
+          <select id="filterMode" [(ngModel)]="selectedPaymentMode" (change)="applyFilters()" class="filter-select">
+            <option value="">Tous les modes</option>
+            <option *ngFor="let mode of paymentModes" [value]="mode">
+              {{ formatPaymentMode(mode) }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Year Filter -->
+        <div class="filter-group">
+          <label for="filterYear">
+            <i class="fa-solid fa-calendar-year"></i>
+            Année
+          </label>
+          <select id="filterYear" [(ngModel)]="selectedYear" (change)="applyFilters()" class="filter-select">
+            <option value="">Toutes les années</option>
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Filter Actions Row -->
+      <div class="filter-row actions-row">
+        <div class="filter-actions">
+          <button class="clear-btn" (click)="clearFilters()" title="Effacer tous les filtres">
+            <i class="fa-solid fa-times"></i>
+            Effacer Tout
+          </button>
+          <button class="refresh-btn" (click)="refreshData()" title="Actualiser les données">
+            <i class="fa-solid fa-sync-alt"></i>
+            Actualiser
+          </button>
+          <button class="export-pdf-btn" (click)="exportToPdf()" title="Exporter en PDF">
+            <i class="fas fa-file-pdf"></i>
+            PDF
+          </button>
+          <button class="export-excel-btn" (click)="exportToExcel()" title="Exporter en Excel">
+            <i class="fas fa-file-excel"></i>
+            Excel
+          </button>
+        </div>
+
+        <div class="filter-summary">
+          <span class="results-count">
+            <i class="fa-solid fa-list"></i>
+            {{ filteredReglements.length }} résultat(s)
+          </span>
+          <span class="total-filtered" *ngIf="filteredReglements.length !== reglements.length">
+            sur {{ reglements.length }} total
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Reglements Table -->
+  <div class="table-container">
+    <div class="table-header">
+      <h3>
+        <i class="fa-solid fa-list"></i>
+        Liste des Règlements
+      </h3>
+      <div class="table-controls">
+        <div class="table-info">
+          <span class="badge primary-badge">{{ filteredReglements.length }} règlement(s)</span>
+          <span class="total-amount">Total: {{ formatCurrency(getTotalFilteredAmount()) }}</span>
+        </div>
+        <div class="table-actions">
+          <div class="sort-controls">
+            <label for="sortBy">Trier par:</label>
+            <select id="sortBy" [(ngModel)]="sortBy" (change)="applySorting()">
+              <option value="dateReglement">Date</option>
+              <option value="montantPaye">Montant</option>
+              <option value="numeroReglement">Numéro</option>
+              <option value="client">Client</option>
+            </select>
+            <button class="sort-direction-btn"
+                    (click)="toggleSortDirection()"
+                    [title]="sortDirection === 'asc' ? 'Tri croissant' : 'Tri décroissant'">
+              <i [class]="sortDirection === 'asc' ? 'fa-solid fa-arrow-up' : 'fa-solid fa-arrow-down'"></i>
+            </button>
+          </div>
+          <div class="pagination-size">
+            <label for="pageSize">Afficher:</label>
+            <select id="pageSize" [(ngModel)]="pageSize" (change)="updatePagination()">
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-body">
+      <div *ngIf="filteredReglements.length === 0" class="empty-state">
+        <i class="fa-solid fa-credit-card"></i>
+        <p>Aucun règlement trouvé</p>
+        <small>Essayez de modifier vos critères de recherche</small>
+      </div>
+      <div *ngIf="filteredReglements.length > 0" class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Numéro</th>
+              <th>Facture</th>
+              <th>Client</th>
+              <th>Montant</th>
+              <th>Mode</th>
+              <th>Date</th>
+              <th>Référence</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reglement of paginatedReglements; let i = index"
+                [class.highlighted]="i % 2 === 0">
+              <td>
+                <span class="number-badge">{{ reglement.numeroReglement }}</span>
+              </td>
+              <td>
+                <span class="invoice-badge">Facture #{{ reglement.factureId }}</span>
+              </td>
+              <td>
+                <div class="client-info">
+                  <span *ngIf="getClientById(reglement.clientId) as client" class="client-name">
+                    <i class="fa-solid fa-user"></i>
+                    {{ client.prenom }} {{ client.nom }}
+                  </span>
+                  <span *ngIf="!getClientById(reglement.clientId)" class="client-unknown">
+                    <i class="fa-solid fa-user-slash"></i>
+                    Client inconnu
+                  </span>
+                </div>
+              </td>
+              <td class="amount-cell">
+                <div class="amount-container">
+                  <span class="amount-value">{{ formatCurrency(reglement.montantPaye) }}</span>
+                  <div class="amount-bar">
+                    <div class="amount-progress"
+                         [style.width.%]="(reglement.montantPaye / getTotalFilteredAmount()) * 100"></div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="mode-badge" [ngClass]="getPaymentModeClass(reglement.modeReglement)">
+                  <i [class]="getPaymentModeIcon(reglement.modeReglement)"></i>
+                  {{ formatPaymentMode(reglement.modeReglement) }}
+                </span>
+              </td>
+              <td class="date-cell">
+                <div class="date-info">
+                  <span class="date-value">{{ reglement.dateReglement | date:'dd/MM/yyyy' }}</span>
+                  <span class="date-time">{{ reglement.dateReglement | date:'HH:mm' }}</span>
+                </div>
+              </td>
+              <td class="reference-cell">
+                <span class="reference-value" [title]="reglement.reference">
+                  {{ reglement.reference || 'N/A' }}
+                </span>
+              </td>
+              <td>
+                <div class="actions">
+                  <button class="view-btn"
+                          (click)="viewReglement(reglement)"
+                          title="Voir détails">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                  <button class="delete-btn"
+                          (click)="deleteReglement(reglement)"
+                          title="Supprimer">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Enhanced Pagination -->
+      <div *ngIf="filteredReglements.length > 0" class="pagination-container">
+        <div class="pagination-info">
+          <span>
+            Affichage de {{ (currentPage - 1) * pageSize + 1 }} à
+            {{ Math.min(currentPage * pageSize, filteredReglements.length) }}
+            sur {{ filteredReglements.length }} règlements
+          </span>
+        </div>
+        <div class="pagination-controls">
+          <button class="pagination-btn"
+                  (click)="goToPage(1)"
+                  [disabled]="currentPage === 1"
+                  title="Première page">
+            <i class="fa-solid fa-angles-left"></i>
+          </button>
+          <button class="pagination-btn"
+                  (click)="previousPage()"
+                  [disabled]="currentPage === 1"
+                  title="Page précédente">
+            <i class="fa-solid fa-angle-left"></i>
+          </button>
+
+          <div class="pagination-numbers">
+            <button *ngFor="let page of getPaginationPages()"
+                    class="pagination-number"
+                    [class.active]="page === currentPage"
+                    (click)="onPageClick(page)"
+                    [disabled]="page === '...'">
+              {{ page }}
+            </button>
+          </div>
+
+          <button class="pagination-btn"
+                  (click)="nextPage()"
+                  [disabled]="currentPage === getTotalPages()"
+                  title="Page suivante">
+            <i class="fa-solid fa-angle-right"></i>
+          </button>
+          <button class="pagination-btn"
+                  (click)="goToPage(getTotalPages())"
+                  [disabled]="currentPage === getTotalPages()"
+                  title="Dernière page">
+            <i class="fa-solid fa-angles-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Custom Modal Overlay -->
+<div *ngIf="showModalFlag" class="modal-overlay" (click)="hideModal()">
+  <div class="custom-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>
+        <i class="fa-solid fa-credit-card"></i>
+        <span *ngIf="!currentReglement">Nouveau Règlement</span>
+        <span *ngIf="currentReglement">Détails du Règlement</span>
+      </h3>
+      <button class="close-btn" (click)="hideModal()" type="button">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+
+    <form [formGroup]="reglementForm" (ngSubmit)="saveReglement()">
+      <div class="modal-body">
+        <!-- View Mode - Display Only -->
+        <div *ngIf="currentReglement" class="view-mode">
+          <div class="view-grid">
+            <div class="view-group">
+              <label>Facture</label>
+              <div class="view-value">
+                <i class="fa-solid fa-file-invoice"></i>
+                Facture #{{ currentReglement.factureId }}
+              </div>
+            </div>
+
+            <div class="view-group">
+              <label>Montant Payé</label>
+              <div class="view-value amount-value">
+                <i class="fa-solid fa-coins"></i>
+                {{ formatCurrency(currentReglement.montantPaye) }}
+              </div>
+            </div>
+
+            <div class="view-group">
+              <label>Mode de Paiement</label>
+              <div class="view-value">
+                <span class="mode-badge" [ngClass]="getPaymentModeClass(currentReglement.modeReglement)">
+                  {{ formatPaymentMode(currentReglement.modeReglement) }}
+                </span>
+              </div>
+            </div>
+
+            <div class="view-group">
+              <label>Référence</label>
+              <div class="view-value">
+                <i class="fa-solid fa-hashtag"></i>
+                {{ currentReglement.reference || 'Aucune référence' }}
+              </div>
+            </div>
+
+            <div class="view-group">
+              <label>Date de Règlement</label>
+              <div class="view-value">
+                <i class="fa-solid fa-calendar"></i>
+                {{ currentReglement.dateReglement | date:'full' }}
+              </div>
+            </div>
+
+            <div class="view-group full-width" *ngIf="currentReglement.commentaire">
+              <label>Commentaire</label>
+              <div class="view-value comment-value">
+                <i class="fa-solid fa-comment"></i>
+                {{ currentReglement.commentaire }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Create Mode - Form Controls -->
+        <div *ngIf="!currentReglement" class="form-grid">
+          <div class="form-group">
+            <label for="factureId">Facture *</label>
+            <select id="factureId" formControlName="factureId" required>
+              <option value="">Sélectionner une facture</option>
+              <option *ngFor="let invoice of availableInvoices" [value]="invoice.facture.id">
+                Facture #{{ invoice.facture.id }} - {{ invoice.client.prenom }} {{ invoice.client.nom }}
+                ({{ formatCurrency(invoice.montantRestant) }} restant)
+              </option>
+            </select>
+            <div *ngIf="reglementForm.get('factureId')?.invalid && reglementForm.get('factureId')?.touched"
+                 class="error-message">
+              Veuillez sélectionner une facture
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="montantPaye">Montant à Payer *</label>
+            <div class="input-with-currency">
+              <input type="number"
+                     id="montantPaye"
+                     formControlName="montantPaye"
+                     step="0.01"
+                     min="0.01"
+                     placeholder="0.00"
+                     required>
+              <span class="currency">Dt</span>
+            </div>
+            <div *ngIf="reglementForm.get('montantPaye')?.invalid && reglementForm.get('montantPaye')?.touched"
+                 class="error-message">
+              Veuillez saisir un montant valide
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="modeReglement">Mode de Paiement *</label>
+            <select id="modeReglement" formControlName="modeReglement" required>
+              <option value="">Sélectionner un mode</option>
+              <option *ngFor="let mode of paymentModes" [value]="mode">
+                {{ formatPaymentMode(mode) }}
+              </option>
+            </select>
+            <div *ngIf="reglementForm.get('modeReglement')?.invalid && reglementForm.get('modeReglement')?.touched"
+                 class="error-message">
+              Veuillez sélectionner un mode de paiement
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="reference">Référence *</label>
+            <input type="text"
+                   id="reference"
+                   formControlName="reference"
+                   placeholder="Référence du paiement"
+                   required>
+            <div *ngIf="reglementForm.get('reference')?.invalid && reglementForm.get('reference')?.touched"
+                 class="error-message">
+              Veuillez saisir une référence
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="!currentReglement" class="form-group full-width">
+          <label for="commentaire">Commentaire</label>
+          <textarea id="commentaire"
+                    formControlName="commentaire"
+                    rows="3"
+                    placeholder="Commentaire optionnel..."></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="cancel-btn" (click)="hideModal()">
+          <i class="fa-solid fa-times"></i>
+          <span *ngIf="currentReglement">Fermer</span>
+          <span *ngIf="!currentReglement">Annuler</span>
+        </button>
+        <button *ngIf="!currentReglement"
+                type="submit"
+                class="save-btn"
+                [disabled]="reglementForm.invalid || saving">
+          <i *ngIf="saving" class="fa-solid fa-spinner fa-spin"></i>
+          <i *ngIf="!saving" class="fa-solid fa-save"></i>
+          Créer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div *ngIf="showDeleteModal" class="modal-overlay" (click)="hideDeleteModal()">
+  <div class="delete-modal" (click)="$event.stopPropagation()">
+    <div class="delete-header">
+      <h3>
+        <i class="fa-solid fa-exclamation-triangle"></i>
+        Confirmer la suppression
+      </h3>
+    </div>
+
+    <div class="delete-body">
+      <p>Êtes-vous sûr de vouloir supprimer ce règlement ?</p>
+      <div *ngIf="reglementToDelete" class="reglement-info">
+        <div class="info-item">
+          <strong>Numéro:</strong> {{ reglementToDelete.numeroReglement }}
+        </div>
+        <div class="info-item">
+          <strong>Montant:</strong> {{ formatCurrency(reglementToDelete.montantPaye) }}
+        </div>
+        <div class="info-item">
+          <strong>Référence:</strong> {{ reglementToDelete.reference }}
+        </div>
+      </div>
+      <p class="warning-text">
+        <i class="fa-solid fa-warning"></i>
+        Cette action est irréversible !
+      </p>
+    </div>
+
+    <div class="delete-footer">
+      <button type="button" class="cancel-btn" (click)="hideDeleteModal()">
+        <i class="fa-solid fa-times"></i>
+        Annuler
+      </button>
+      <button type="button" class="delete-confirm-btn" (click)="confirmDelete()">
+        <i class="fa-solid fa-trash"></i>
+        Supprimer
+      </button>
+    </div>
+  </div>
+</div>

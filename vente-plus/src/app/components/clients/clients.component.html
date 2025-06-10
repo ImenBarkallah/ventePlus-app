@@ -1,0 +1,512 @@
+<!-- Alerte animée -->
+<div *ngIf="alertMessage" class="alert" [ngClass]="alertType" (click)="closeAlert()">
+  {{ alertMessage }}
+</div>
+
+<div class="category-container">
+  <!-- Enhanced Header -->
+  <div class="header">
+    <div class="header-left">
+      <h2>
+        <i class="fas fa-users"></i>
+        Gestion des Clients
+      </h2>
+      <p class="subtitle">Gérez vos clients et leurs informations</p>
+    </div>
+    <div class="header-actions">
+      <button class="export-pdf-btn" (click)="exportToPdf()" title="Exporter en PDF">
+        <i class="fas fa-file-pdf"></i>
+        <span>PDF</span>
+      </button>
+      <button class="export-excel-btn" (click)="exportToExcel()" title="Exporter en Excel">
+        <i class="fas fa-file-excel"></i>
+        <span>Excel</span>
+      </button>
+      <button class="add-button" title="Ajouter un client" (click)="openModal()">
+        <i class="fas fa-plus"></i>
+        <span>Nouveau Client</span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Enhanced Stats Dashboard -->
+  <div class="stats-container">
+    <div class="stat-card total-clients" (click)="applyFilter('all')">
+      <div class="stat-icon">
+        <i class="fa-solid fa-users"></i>
+      </div>
+      <div class="stat-info">
+        <h3>{{ clientStats.total }}</h3>
+        <p>Total Clients</p>
+        <span class="stat-trend">
+          <i class="fa-solid fa-chart-line"></i>
+          Tous les clients
+        </span>
+      </div>
+    </div>
+
+    <div class="stat-card new-clients" (click)="applyFilter('recent')">
+      <div class="stat-icon">
+        <i class="fa-solid fa-user-plus"></i>
+      </div>
+      <div class="stat-info">
+        <h3>{{ clientStats.newThisMonth }}</h3>
+        <p>Nouveaux ce Mois</p>
+        <span class="stat-trend">
+          <i class="fa-solid fa-calendar"></i>
+          Ce mois-ci
+        </span>
+      </div>
+    </div>
+
+    <div class="stat-card active-clients" (click)="applyFilter('active')">
+      <div class="stat-icon">
+        <i class="fa-solid fa-user-check"></i>
+      </div>
+      <div class="stat-info">
+        <h3>{{ clientStats.activeClients }}</h3>
+        <p>Clients Actifs</p>
+        <span class="stat-trend">
+          <i class="fa-solid fa-pulse"></i>
+          Actifs
+        </span>
+      </div>
+    </div>
+
+    <div class="stat-card average-order">
+      <div class="stat-icon">
+        <i class="fa-solid fa-coins"></i>
+      </div>
+      <!-- <div class="stat-info">
+        <h3>{{ clientStats.averageOrderValue | number:'1.2-2' }} DT</h3>
+        <p>Panier Moyen</p>
+        <span class="stat-trend">
+          <i class="fa-solid fa-shopping-cart"></i>
+          Par commande
+        </span>
+      </div> -->
+    </div>
+  </div>
+
+  <!-- Enhanced Filters & Search -->
+  <div class="filters-container">
+    <div class="filters-header">
+      <h3>
+        <i class="fa-solid fa-filter"></i>
+        Filtres & Recherche
+      </h3>
+      <div class="filter-status" *ngIf="selectedFilter !== 'all'">
+        <span class="active-filter">
+          {{ selectedFilter === 'recent' ? 'Clients Récents' : selectedFilter === 'active' ? 'Clients Actifs' : 'Filtre Actif' }}
+        </span>
+        <button class="clear-filter-btn" (click)="clearFilters()" title="Supprimer le filtre">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="filters-body">
+      <div class="filter-row">
+        <div class="search-group">
+          <label for="searchTerm">
+            <i class="fa-solid fa-search"></i>
+            Recherche Globale
+          </label>
+          <div class="search-input-container">
+            <input type="text"
+                   id="searchTerm"
+                   placeholder="Rechercher par nom, prénom, email, téléphone..."
+                   [(ngModel)]="searchTerm"
+                   (ngModelChange)="onSearchChange()"
+                   class="search-input">
+            <button *ngIf="searchTerm"
+                    class="clear-search-btn"
+                    (click)="searchTerm = ''; onSearchChange()"
+                    title="Effacer la recherche">
+              <i class="fa-solid fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-actions">
+          <button class="clear-btn" (click)="clearFilters()" title="Effacer tous les filtres">
+            <i class="fa-solid fa-times"></i>
+            Effacer Tout
+          </button>
+          <button class="refresh-btn" (click)="loadClients()" title="Actualiser les données">
+            <i class="fa-solid fa-sync-alt"></i>
+            Actualiser
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Table -->
+  <div class="table-container">
+    <div class="table-header">
+      <h3>
+        <i class="fa-solid fa-table"></i>
+        Liste des Clients
+      </h3>
+      <div class="table-info">
+        <span class="badge primary-badge">{{ filteredClients.length }} client(s)</span>
+        <span class="results-info" *ngIf="filteredClients.length !== clients.length">
+          sur {{ clients.length }} total
+        </span>
+      </div>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Code Client</th>
+            <th class="sortable" (click)="toggleSort('nom')">
+              Nom
+              <i class="fa-solid"
+                 [class.fa-sort]="sortBy !== 'nom'"
+                 [class.fa-sort-up]="sortBy === 'nom' && sortDirection === 'asc'"
+                 [class.fa-sort-down]="sortBy === 'nom' && sortDirection === 'desc'"></i>
+            </th>
+            <th class="sortable" (click)="toggleSort('prenom')">
+              Prénom
+              <i class="fa-solid"
+                 [class.fa-sort]="sortBy !== 'prenom'"
+                 [class.fa-sort-up]="sortBy === 'prenom' && sortDirection === 'asc'"
+                 [class.fa-sort-down]="sortBy === 'prenom' && sortDirection === 'desc'"></i>
+            </th>
+            <th class="sortable" (click)="toggleSort('email')">
+              Email
+              <i class="fa-solid"
+                 [class.fa-sort]="sortBy !== 'email'"
+                 [class.fa-sort-up]="sortBy === 'email' && sortDirection === 'asc'"
+                 [class.fa-sort-down]="sortBy === 'email' && sortDirection === 'desc'"></i>
+            </th>
+            <th>Téléphone</th>
+            <th>Adresse</th>
+            <th class="sortable" (click)="toggleSort('createdAt')">
+              Date de création
+              <i class="fa-solid"
+                 [class.fa-sort]="sortBy !== 'createdAt'"
+                 [class.fa-sort-up]="sortBy === 'createdAt' && sortDirection === 'asc'"
+                 [class.fa-sort-down]="sortBy === 'createdAt' && sortDirection === 'desc'"></i>
+            </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let client of paginatedClients; let i = index"
+              [class.highlighted]="i % 2 === 0">
+            <td>
+              <span class="code-badge">{{ client.codeClient || 'N/A' }}</span>
+            </td>
+            <td class="name-cell">
+              <div class="client-info">
+                <span class="client-name">{{ client.nom }}</span>
+              </div>
+            </td>
+            <td class="name-cell">
+              <span class="client-firstname">{{ client.prenom }}</span>
+            </td>
+            <td class="email-cell">
+              <a [href]="'mailto:' + client.email" class="email-link">
+                <i class="fa-solid fa-envelope"></i>
+                {{ client.email }}
+              </a>
+            </td>
+            <td class="phone-cell">
+              <span *ngIf="client.telephone" class="phone-number">
+                <i class="fa-solid fa-phone"></i>
+                {{ client.telephone }}
+              </span>
+              <span *ngIf="!client.telephone" class="no-data">N/A</span>
+            </td>
+            <td class="address-cell">
+              <span *ngIf="client.adresse" class="address" [title]="client.adresse">
+                <i class="fa-solid fa-map-marker-alt"></i>
+                {{ client.adresse.length > 30 ? (client.adresse | slice:0:30) + '...' : client.adresse }}
+              </span>
+              <span *ngIf="!client.adresse" class="no-data">N/A</span>
+            </td>
+            <td class="date-cell">
+              <div class="date-info">
+                <i class="fa-solid fa-calendar"></i>
+                <span class="date-value">{{ client.createdAt | date:'dd/MM/yyyy' }}</span>
+              </div>
+              <div class="time-info">
+                <i class="fa-solid fa-clock"></i>
+                <span class="date-time">{{ client.createdAt | date:'HH:mm' }}</span>
+              </div>
+            </td>
+            <td class="actions">
+              <button class="view-btn" (click)="viewClient(client)" title="Voir détails">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+              <button class="edit-btn" title="Modifier" (click)="openEditModal(client)">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button class="delete-btn" title="Supprimer" (click)="openDeleteModal(client)">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Pagination -->
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">&laquo;</button>
+      <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="goToPage(i+1)" [class.active]="currentPage === (i+1)">{{ i+1 }}</button>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">&raquo;</button>
+    </div>
+  </div>
+
+  <!-- Modal d'ajout/modification de client -->
+  <div class="modal-backdrop" *ngIf="showModal" (click)="closeModal()"></div>
+  <div class="modal" *ngIf="showModal">
+    <form (ngSubmit)="onModalSubmit()" class="modal-content" (click)="$event.stopPropagation()">
+      <h3>{{ isEditMode ? 'Modifier le client' : 'Ajouter un client' }}</h3>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <i class="fa-solid fa-id-card"></i>
+          <input
+            type="text"
+            id="codeClient"
+            [(ngModel)]="modalClient.codeClient"
+            name="codeClient"
+            placeholder="Code Client"
+            [required]="isEditMode"
+            [readonly]="isEditMode"
+            #codeClientInput="ngModel"
+            [class.invalid]="codeClientInput.invalid && codeClientInput.touched"
+          />
+           <div class="error-message" *ngIf="codeClientInput.invalid && codeClientInput.touched">
+              <i class="fa-solid fa-exclamation-circle"></i>
+              Le code client est requis
+            </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <i class="fa-solid fa-user"></i>
+          <input
+            type="text"
+            id="nom"
+            [(ngModel)]="modalClient.nom"
+            name="nom"
+            placeholder="Nom"
+            required
+            autofocus
+            #nomInput="ngModel"
+            [class.invalid]="nomInput.invalid && nomInput.touched"
+          />
+          <div class="error-message" *ngIf="nomInput.invalid && nomInput.touched">
+            <i class="fa-solid fa-exclamation-circle"></i>
+            Le nom est requis
+          </div>
+        </div>
+        <div class="form-group">
+          <i class="fa-solid fa-user"></i>
+          <input
+            type="text"
+            id="prenom"
+            [(ngModel)]="modalClient.prenom"
+            name="prenom"
+            placeholder="Prénom"
+            required
+            #prenomInput="ngModel"
+            [class.invalid]="prenomInput.invalid && prenomInput.touched"
+          />
+          <div class="error-message" *ngIf="prenomInput.invalid && prenomInput.touched">
+            <i class="fa-solid fa-exclamation-circle"></i>
+            Le prénom est requis
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <i class="fa-solid fa-envelope"></i>
+          <input
+            type="email"
+            id="email"
+            [(ngModel)]="modalClient.email"
+            name="email"
+            placeholder="Email"
+            required
+            #emailInput="ngModel"
+            [class.invalid]="emailInput.invalid && emailInput.touched"
+          />
+           <div class="error-message" *ngIf="emailInput.invalid && emailInput.touched">
+            <i class="fa-solid fa-exclamation-circle"></i>
+            L'email est requis
+          </div>
+        </div>
+        <div class="form-group">
+          <i class="fa-solid fa-phone"></i>
+          <input
+            type="tel"
+            id="telephone"
+            [(ngModel)]="modalClient.telephone"
+            name="telephone"
+            placeholder="Téléphone"
+            #telInput="ngModel"
+            [class.invalid]="telInput.invalid && telInput.touched"
+          />
+           <div class="error-message" *ngIf="telInput.invalid && telInput.touched">
+            <i class="fa-solid fa-exclamation-circle"></i>
+            Le téléphone est requis
+          </div>
+        </div>
+      </div>
+
+       <div class="form-row">
+        <div class="form-group">
+          <i class="fa-solid fa-location-dot"></i>
+          <input
+            type="text"
+            id="adresse"
+            [(ngModel)]="modalClient.adresse"
+            name="adresse"
+            placeholder="Adresse"
+             #adresseInput="ngModel"
+            [class.invalid]="adresseInput.invalid && adresseInput.touched"
+          />
+           <div class="error-message" *ngIf="adresseInput.invalid && adresseInput.touched">
+            <i class="fa-solid fa-exclamation-circle"></i>
+            L'adresse est requise
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" (click)="closeModal()">
+          <i class="fa-solid fa-times"></i>
+          Annuler
+        </button>
+        <button type="submit" class="modal-validate">
+          <i class="fa-solid fa-check"></i>
+          {{ isEditMode ? 'Enregistrer' : 'Valider' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Modal de détails client -->
+  <div class="modal-backdrop" *ngIf="showViewModal" (click)="closeViewModal()"></div>
+  <div class="modal view-modal" *ngIf="showViewModal">
+    <div class="modal-content view-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>
+          <i class="fa-solid fa-user-circle"></i>
+          Détails du Client
+        </h3>
+        <button class="close-btn" (click)="closeViewModal()" title="Fermer">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+
+      <div class="client-details" *ngIf="clientToView">
+        <div class="detail-section">
+          <h4>
+            <i class="fa-solid fa-id-card"></i>
+            Informations Générales
+          </h4>
+          <div class="detail-grid">
+            <div class="detail-item">
+              <label>Code Client:</label>
+              <span class="code-value">{{ clientToView.codeClient || 'Non défini' }}</span>
+            </div>
+            <div class="detail-item">
+              <label>Nom Complet:</label>
+              <span class="name-value">{{ clientToView.nom }} {{ clientToView.prenom }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h4>
+            <i class="fa-solid fa-envelope"></i>
+            Contact
+          </h4>
+          <div class="detail-grid">
+            <div class="detail-item">
+              <label>Email:</label>
+              <a [href]="'mailto:' + clientToView.email" class="email-value">
+                <i class="fa-solid fa-envelope"></i>
+                {{ clientToView.email }}
+              </a>
+            </div>
+            <div class="detail-item" *ngIf="clientToView.telephone">
+              <label>Téléphone:</label>
+              <a [href]="'tel:' + clientToView.telephone" class="phone-value">
+                <i class="fa-solid fa-phone"></i>
+                {{ clientToView.telephone }}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-section" *ngIf="clientToView.adresse">
+          <h4>
+            <i class="fa-solid fa-map-marker-alt"></i>
+            Adresse
+          </h4>
+          <div class="address-value">
+            <i class="fa-solid fa-location-dot"></i>
+            {{ clientToView.adresse }}
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h4>
+            <i class="fa-solid fa-calendar"></i>
+            Informations Système
+          </h4>
+          <div class="detail-grid">
+            <div class="detail-item">
+              <label>Date de création:</label>
+              <span class="date-value">
+                <i class="fa-solid fa-calendar-plus"></i>
+                {{ clientToView.createdAt | date:'dd/MM/yyyy à HH:mm' }}
+              </span>
+            </div>
+            <div class="detail-item">
+              <label>ID Client:</label>
+              <span class="id-value">
+                <i class="fa-solid fa-hashtag"></i>
+                {{ clientToView.id || 'Non défini' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" (click)="closeViewModal()">
+          <i class="fa-solid fa-times"></i>
+          Fermer
+        </button>
+        <button type="button" class="modal-validate" (click)="openEditModal(clientToView!); closeViewModal()">
+          <i class="fa-solid fa-edit"></i>
+          Modifier
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de confirmation de suppression -->
+  <div class="modal-backdrop" *ngIf="showDeleteModal" (click)="closeDeleteModal()"></div>
+  <div class="modal" *ngIf="showDeleteModal">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h3>Confirmer la suppression</h3>
+      <p>Voulez-vous vraiment supprimer le client <b>{{ clientToDelete?.nom }} {{ clientToDelete?.prenom }}</b> ?</p>
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" (click)="closeDeleteModal()">Annuler</button>
+        <button type="button" class="modal-validate delete" (click)="confirmDelete()">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>

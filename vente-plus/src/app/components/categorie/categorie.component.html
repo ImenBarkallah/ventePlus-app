@@ -1,0 +1,442 @@
+<!-- Alerte animée -->
+<div *ngIf="alertMessage" class="alert" [ngClass]="alertType" (click)="closeAlert()">
+  {{ alertMessage }}
+</div>
+
+<div class="category-container">
+  <!-- Enhanced Header -->
+  <div class="header">
+    <div class="header-left">
+      <h2>
+        <i class="fas fa-layer-group"></i>
+        Gestion des Catégories
+      </h2>
+      <p class="subtitle">Gérez vos catégories de produits</p>
+    </div>
+    <div class="header-actions">
+      <button class="export-pdf-btn" (click)="exportToPdf()" title="Exporter en PDF">
+        <i class="fas fa-file-pdf"></i>
+        <span>PDF</span>
+      </button>
+      <button class="export-excel-btn" (click)="exportToExcel()" title="Exporter en Excel">
+        <i class="fas fa-file-excel"></i>
+        <span>Excel</span>
+      </button>
+      <button class="add-button" title="Ajouter une catégorie" (click)="openModal()">
+        <i class="fas fa-plus"></i>
+        <span>Nouvelle Catégorie</span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Enhanced Stats Dashboard -->
+  <div class="stats-container">
+    <div class="stat-card total-categories" (click)="applyFilter('all')">
+      <div class="stat-icon">
+        <i class="fas fa-layer-group"></i>
+      </div>
+      <div class="stat-info">
+        <h3>{{ categorieStats.total }}</h3>
+        <p>Total Catégories</p>
+        <span class="stat-trend">
+          <i class="fas fa-chart-line"></i>
+          Toutes les catégories
+        </span>
+      </div>
+    </div>
+
+    <div class="stat-card active-categories" (click)="applyFilter('active')">
+      <div class="stat-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <div class="stat-info">
+        <h3>{{ categorieStats.active }}</h3>
+        <p>Catégories Actives</p>
+        <span class="stat-trend">
+          <i class="fas fa-toggle-on"></i>
+          Actives
+        </span>
+      </div>
+    </div>
+
+    <div class="stat-card inactive-categories" (click)="applyFilter('inactive')">
+      <div class="stat-icon">
+        <i class="fas fa-times-circle"></i>
+      </div>
+      <div class="stat-info">
+        <h3>{{ categorieStats.inactive }}</h3>
+        <p>Catégories Inactives</p>
+        <span class="stat-trend">
+          <i class="fas fa-toggle-off"></i>
+          Inactives
+        </span>
+      </div>
+    </div>
+
+    <div class="stat-card with-images" (click)="applyFilter('withImages')">
+      <div class="stat-icon">
+        <i class="fas fa-images"></i>
+      </div>
+      <div class="stat-info">
+        <h3>{{ categorieStats.withImages }}</h3>
+        <p>Avec Images</p>
+        <span class="stat-trend">
+          <i class="fas fa-camera"></i>
+          Illustrées
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Filters & Search -->
+  <div class="filters-container">
+    <div class="filters-header">
+      <h3>
+        <i class="fas fa-filter"></i>
+        Filtres & Recherche
+      </h3>
+      <div class="filter-status" *ngIf="selectedFilter !== 'all'">
+        <span class="active-filter">
+          {{ selectedFilter === 'active' ? 'Catégories Actives' :
+             selectedFilter === 'inactive' ? 'Catégories Inactives' :
+             selectedFilter === 'withImages' ? 'Avec Images' : 'Filtre Actif' }}
+        </span>
+        <button class="clear-filter-btn" (click)="clearFilters()" title="Supprimer le filtre">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="filters-body">
+      <div class="filter-row">
+        <div class="search-group">
+          <label for="searchTerm">
+            <i class="fas fa-search"></i>
+            Recherche Globale
+          </label>
+          <div class="search-input-container">
+            <input type="text"
+                   id="searchTerm"
+                   placeholder="Rechercher par nom ou description..."
+                   [(ngModel)]="searchTerm"
+                   (ngModelChange)="onSearchChange()"
+                   class="search-input">
+            <button *ngIf="searchTerm"
+                    class="clear-search-btn"
+                    (click)="searchTerm = ''; onSearchChange()"
+                    title="Effacer la recherche">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-actions">
+          <button class="clear-btn" (click)="clearFilters()" title="Effacer tous les filtres">
+            <i class="fas fa-times"></i>
+            Effacer Tout
+          </button>
+          <button class="refresh-btn" (click)="loadCategories()" title="Actualiser les données">
+            <i class="fas fa-sync-alt"></i>
+            Actualiser
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Table -->
+  <div class="table-container">
+    <div class="table-header">
+      <h3>
+        <i class="fas fa-table"></i>
+        Liste des Catégories
+      </h3>
+      <div class="table-info">
+        <span class="badge primary-badge">{{ filteredCategories.length }} catégorie(s)</span>
+        <span class="results-info" *ngIf="filteredCategories.length !== categories.length">
+          sur {{ categories.length }} total
+        </span>
+      </div>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th class="sortable" (click)="toggleSort('nom')">
+              Nom
+              <i class="fas"
+                 [class.fa-sort]="sortBy !== 'nom'"
+                 [class.fa-sort-up]="sortBy === 'nom' && sortDirection === 'asc'"
+                 [class.fa-sort-down]="sortBy === 'nom' && sortDirection === 'desc'"></i>
+            </th>
+            <th class="sortable" (click)="toggleSort('description')">
+              Description
+              <i class="fas"
+                 [class.fa-sort]="sortBy !== 'description'"
+                 [class.fa-sort-up]="sortBy === 'description' && sortDirection === 'asc'"
+                 [class.fa-sort-down]="sortBy === 'description' && sortDirection === 'desc'"></i>
+            </th>
+            <th class="sortable" (click)="toggleSort('etat')">
+              Statut
+              <i class="fas"
+                 [class.fa-sort]="sortBy !== 'etat'"
+                 [class.fa-sort-up]="sortBy === 'etat' && sortDirection === 'asc'"
+                 [class.fa-sort-down]="sortBy === 'etat' && sortDirection === 'desc'"></i>
+            </th>
+            <th class="sortable" (click)="toggleSort('createdAt')">
+              Date de création
+              <i class="fas"
+                 [class.fa-sort]="sortBy !== 'createdAt'"
+                 [class.fa-sort-up]="sortBy === 'createdAt' && sortDirection === 'asc'"
+                 [class.fa-sort-down]="sortBy === 'createdAt' && sortDirection === 'desc'"></i>
+            </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cat of paginatedCategories; let i = index"
+              [class.highlighted]="i % 2 === 0">
+            <td class="image-cell">
+              <div class="product-image" *ngIf="cat.imageUrl">
+                <img [src]="cat.imageUrl" [alt]="cat.nom" />
+                <div class="image-overlay">
+                  <i class="fas fa-eye"></i>
+                </div>
+              </div>
+              <div class="no-image" *ngIf="!cat.imageUrl">
+                <i class="fas fa-image"></i>
+                <span>Aucune image</span>
+              </div>
+            </td>
+            <td class="name-cell">
+              <div class="category-info">
+                <span class="category-name">{{ cat.nom }}</span>
+              </div>
+            </td>
+            <td class="description-cell" [attr.data-tooltip]="cat.description">
+              <div class="description-text">
+                <span *ngIf="cat.description">
+                  {{ cat.description.length > 50 ? (cat.description | slice:0:50) + '...' : cat.description }}
+                </span>
+                <span *ngIf="!cat.description" class="no-data">Aucune description</span>
+              </div>
+            </td>
+            <td>
+              <div class="status-badge" [class.active]="cat.etat" [class.inactive]="!cat.etat">
+                <i class="fas" [class.fa-check-circle]="cat.etat" [class.fa-times-circle]="!cat.etat"></i>
+                <span>{{ cat.etat ? 'Actif' : 'Inactif' }}</span>
+              </div>
+            </td>
+            <td class="date-cell">
+              <div class="date-info">
+                <i class="fas fa-calendar"></i>
+                <span class="date-value">{{ cat.createdAt | date:'dd/MM/yyyy' }}</span>
+              </div>
+              <div class="time-info">
+                <i class="fas fa-clock"></i>
+                <span class="date-time">{{ cat.createdAt | date:'HH:mm' }}</span>
+              </div>
+            </td>
+            <td class="actions">
+              <button class="view-btn" title="Voir détails" (click)="viewCategorie(cat)">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="edit-btn" title="Modifier" (click)="openEditModal(cat)">
+                <i class="fas fa-pen-to-square"></i>
+              </button>
+              <button class="delete-btn" title="Supprimer" (click)="openDeleteModal(cat)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Pagination -->
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">&laquo;</button>
+      <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="goToPage(i+1)" [class.active]="currentPage === (i+1)">{{ i+1 }}</button>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">&raquo;</button>
+    </div>
+  </div>
+
+  <!-- Modal d'ajout/modification de catégorie -->
+  <div class="modal-backdrop" *ngIf="showModal" (click)="closeModal()"></div>
+  <div class="modal" *ngIf="showModal">
+    <form (ngSubmit)="onModalSubmit()" class="modal-content" (click)="$event.stopPropagation()">
+      <h3>{{ isEditMode ? 'Modifier la catégorie' : 'Ajouter une catégorie' }}</h3>
+      
+      <div class="form-group">
+        <input
+          type="text"
+          [(ngModel)]="modalCategorie.nom"
+          name="categorieNom"
+          placeholder="Nom de la catégorie"
+          required
+          autofocus
+        />
+        <i class="fa-solid fa-layer-group"></i>
+      </div>
+
+      <div class="form-group">
+        <textarea
+          [(ngModel)]="modalCategorie.description"
+          name="categorieDescription"
+          placeholder="Description de la catégorie"
+          rows="3"
+        ></textarea>
+        <i class="fa-solid fa-align-left"></i>
+      </div>
+
+      <div class="form-group">
+        <label class="checkbox-label">
+          <input
+            type="checkbox"
+            [(ngModel)]="modalCategorie.etat"
+            name="categorieEtat"
+          />
+          <span>Catégorie active</span>
+        </label>
+      </div>
+
+      <!-- Zone d'upload ou prévisualisation d'image -->
+      <div class="form-group">
+        <label for="file-upload" class="file-upload-label" *ngIf="!imageUrlPreview">
+          <div class="file-upload">
+            <input id="file-upload" type="file" (change)="onFileSelected($event)" accept="image/*" class="file-input" />
+            <i class="fa-solid fa-image"></i>
+            <span class="file-label">{{ selectedFileName || 'Ajouter ou changer l\'image' }}</span>
+          </div>
+        </label>
+
+        <div class="image-preview" *ngIf="imageUrlPreview">
+          <img [src]="imageUrlPreview" alt="Image prévisualisée" />
+          <button class="remove-image-btn" (click)="removeImage()"><i class="fa-solid fa-times"></i></button>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" (click)="closeModal()">
+          <i class="fa-solid fa-times"></i>
+          Annuler
+        </button>
+        <button type="submit" class="modal-validate">
+          <i class="fa-solid fa-check"></i>
+          {{ isEditMode ? 'Enregistrer' : 'Valider' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Modal de détails catégorie -->
+  <div class="modal-backdrop" *ngIf="showViewModal" (click)="closeViewModal()"></div>
+  <div class="modal view-modal" *ngIf="showViewModal">
+    <div class="modal-content view-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>
+          <i class="fas fa-layer-group"></i>
+          Détails de la Catégorie
+        </h3>
+        <button class="close-btn" (click)="closeViewModal()" title="Fermer">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="category-details" *ngIf="categorieToView">
+        <div class="detail-section">
+          <h4>
+            <i class="fas fa-info-circle"></i>
+            Informations Générales
+          </h4>
+          <div class="detail-grid">
+            <div class="detail-item">
+              <label>Nom de la catégorie:</label>
+              <span class="name-value">{{ categorieToView.nom }}</span>
+            </div>
+            <div class="detail-item">
+              <label>Statut:</label>
+              <div class="status-badge" [class.active]="categorieToView.etat" [class.inactive]="!categorieToView.etat">
+                <i class="fas" [class.fa-check-circle]="categorieToView.etat" [class.fa-times-circle]="!categorieToView.etat"></i>
+                <span>{{ categorieToView.etat ? 'Actif' : 'Inactif' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-section" *ngIf="categorieToView.description">
+          <h4>
+            <i class="fas fa-align-left"></i>
+            Description
+          </h4>
+          <div class="description-value">
+            {{ categorieToView.description }}
+          </div>
+        </div>
+
+        <div class="detail-section" *ngIf="categorieToView.imageUrl">
+          <h4>
+            <i class="fas fa-image"></i>
+            Image de la Catégorie
+          </h4>
+          <div class="image-preview-large">
+            <img [src]="categorieToView.imageUrl" [alt]="categorieToView.nom" />
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h4>
+            <i class="fas fa-calendar"></i>
+            Informations Système
+          </h4>
+          <div class="detail-grid">
+            <div class="detail-item">
+              <label>Date de création:</label>
+              <span class="date-value">
+                <i class="fas fa-calendar-plus"></i>
+                {{ categorieToView.createdAt | date:'dd/MM/yyyy à HH:mm' }}
+              </span>
+            </div>
+            <div class="detail-item">
+              <label>ID Catégorie:</label>
+              <span class="id-value">
+                <i class="fas fa-hashtag"></i>
+                {{ categorieToView.id || 'Non défini' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" (click)="closeViewModal()">
+          <i class="fas fa-times"></i>
+          Fermer
+        </button>
+        <button type="button" class="modal-validate" (click)="openEditModal(categorieToView!); closeViewModal()">
+          <i class="fas fa-edit"></i>
+          Modifier
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de confirmation de suppression -->
+  <div class="modal-backdrop" *ngIf="showDeleteModal" (click)="closeDeleteModal()"></div>
+  <div class="modal" *ngIf="showDeleteModal">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h3>Confirmer la suppression</h3>
+      <p>Voulez-vous vraiment supprimer la catégorie <b>{{ categorieToDelete?.nom }}</b> ?</p>
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" (click)="closeDeleteModal()">
+          <i class="fas fa-times"></i>
+          Annuler
+        </button>
+        <button type="button" class="modal-validate delete" (click)="confirmDelete()">
+          <i class="fas fa-trash"></i>
+          Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="logo-container">
+      <div class="logo">
+        <span>V</span><span class="plus-text-plus">+</span>
+      </div>
+      <h1>Vente <span class="plus-text">Plus</span></h1>
+    </div>
+    
+    <div class="form-container">
+      <h2>Connexion</h2>
+      <form (ngSubmit)="onSubmit()">
+        <div class="input-group">
+          <div class="input-icon">
+            <i class="user-icon"></i>
+          </div>
+          <input 
+            type="text" 
+            id="username" 
+            name="username" 
+            [(ngModel)]="username"
+            required
+            placeholder=" "
+            autocomplete="username">
+          <label for="username">Nom d'utilisateur</label>
+          <div class="input-line"></div>
+        </div>
+        
+        <div class="input-group">
+          <div class="input-icon">
+            <i class="password-icon"></i>
+          </div>
+          <input 
+            [type]="showPassword ? 'text' : 'password'"
+            id="password" 
+            name="password" 
+            [(ngModel)]="password"
+            required
+            placeholder=" "
+            autocomplete="current-password">
+          <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+            <i class="eye-icon" [class.visible]="showPassword"></i>
+          </button>
+          <label for="password">Mot de passe</label>
+          <div class="input-line"></div>
+        </div>
+        
+        <div class="remember-forgot">
+          <div class="remember">
+            <input type="checkbox" id="remember">
+            <label for="remember">Se souvenir de moi</label>
+          </div>
+          <a href="#" class="forgot">Mot de passe oublié?</a>
+        </div>
+        
+        <button type="submit" class="login-btn">
+          Se connecter
+        </button>
+      </form>
+    </div>
+  </div>
+  
+  <div class="decoration-circle circle-1"></div>
+  <div class="decoration-circle circle-2"></div>
+  <div class="decoration-circle circle-3"></div>
+</div>

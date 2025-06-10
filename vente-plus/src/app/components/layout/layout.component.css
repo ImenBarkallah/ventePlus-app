@@ -1,0 +1,63 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  padding-top: 64px; /* hauteur de la topbar */
+}
+
+.sidebar {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  height: calc(100vh - 64px);
+  z-index: 999;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background: #f5f7fa;
+  margin-left: 260px; /* largeur de la sidebar */
+  min-height: calc(100vh - 64px);
+  transition: background-color 0.3s ease;
+}
+
+/* Dark mode styles */
+:host-context(.dark-mode) .content {
+  background: #2d3748;
+}
+
+/* Suppression des styles redondants */
+.layout-container,
+.content-area {
+  display: none;
+}
+
+.layout-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.content-area {
+  flex-grow: 1;
+  margin-left: 260px; /* Même largeur que la sidebar */
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .content-area {
+    margin-left: 0;
+    width: 100%;
+  }
+} 

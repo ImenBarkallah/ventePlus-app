@@ -1,0 +1,667 @@
+<div class="container mt-4">
+  <!-- Alert -->
+  <div *ngIf="showAlert" class="alert" [ngClass]="alertType" (click)="closeAlert()">
+    {{ alertMessage }}
+  </div>
+
+  <div class="category-container">
+    <!-- Enhanced Header -->
+    <div class="header">
+      <div class="header-left">
+        <h2>
+          <i class="fas fa-file-invoice-dollar"></i>
+          Gestion des Factures
+        </h2>
+        <p class="subtitle">Gérez vos factures et suivez leur statut de paiement</p>
+      </div>
+      <div class="header-actions">
+        <button class="export-pdf-btn" (click)="exportToPdf()" title="Exporter en PDF">
+          <i class="fas fa-file-pdf"></i>
+          <span>PDF</span>
+        </button>
+        <button class="export-excel-btn" (click)="exportToExcel()" title="Exporter en Excel">
+          <i class="fas fa-file-excel"></i>
+          <span>Excel</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Enhanced Stats Dashboard -->
+    <div class="stats-container">
+      <div class="stat-card total-factures" (click)="applyPaymentStatusFilter('all')">
+        <div class="stat-icon">
+          <i class="fas fa-file-invoice-dollar"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ factureStats.total }}</h3>
+          <p>Total Factures</p>
+          <span class="stat-trend">
+            <i class="fas fa-chart-line"></i>
+            Toutes les factures
+          </span>
+        </div>
+      </div>
+
+      <div class="stat-card paid-factures" (click)="applyPaymentStatusFilter('paid')">
+        <div class="stat-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ factureStats.paid }}</h3>
+          <p>Payées</p>
+          <span class="stat-trend">
+            <i class="fas fa-thumbs-up"></i>
+            Complètement réglées
+          </span>
+        </div>
+      </div>
+
+      <div class="stat-card unpaid-factures" (click)="applyPaymentStatusFilter('unpaid')">
+        <div class="stat-icon">
+          <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ factureStats.unpaid }}</h3>
+          <p>Non Payées</p>
+          <span class="stat-trend">
+            <i class="fas fa-clock"></i>
+            En attente de paiement
+          </span>
+        </div>
+      </div>
+
+      <div class="stat-card partial-factures" (click)="applyPaymentStatusFilter('partial')">
+        <div class="stat-icon">
+          <i class="fas fa-hourglass-half"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ factureStats.partial }}</h3>
+          <p>Partiellement Payées</p>
+          <span class="stat-trend">
+            <i class="fas fa-percentage"></i>
+            Paiement partiel
+          </span>
+        </div>
+      </div>
+
+      <div class="stat-card total-value">
+        <div class="stat-icon">
+          <i class="fas fa-coins"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ factureStats.totalValue | number:'1.0-0' }} DT</h3>
+          <p>Valeur Totale</p>
+          <span class="stat-trend">
+            <i class="fas fa-calculator"></i>
+            Chiffre d'affaires
+          </span>
+        </div>
+      </div>
+
+      <div class="stat-card paid-value">
+        <div class="stat-icon">
+          <i class="fas fa-coins"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ factureStats.paidValue | number:'1.0-0' }} DT</h3>
+          <p>Montant Encaissé</p>
+          <span class="stat-trend">
+            <i class="fas fa-piggy-bank"></i>
+            Revenus réalisés
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enhanced Filters & Search -->
+    <div class="filters-container">
+      <div class="filters-header">
+        <h3>
+          <i class="fas fa-filter"></i>
+          Filtres & Recherche
+        </h3>
+        <div class="filter-status" *ngIf="selectedFilter !== 'all' || clientFilter || dateFilter">
+          <span class="active-filter" *ngIf="selectedFilter !== 'all'">
+            Statut: {{ selectedFilter === 'paid' ? 'Payées' :
+                       selectedFilter === 'unpaid' ? 'Non Payées' :
+                       selectedFilter === 'partial' ? 'Partiellement Payées' : 'Filtre Actif' }}
+          </span>
+          <span class="active-filter" *ngIf="clientFilter">
+            Client: {{ clientFilter }}
+          </span>
+          <span class="active-filter" *ngIf="dateFilter">
+            Date: {{ dateFilter }}
+          </span>
+          <button class="clear-filter-btn" (click)="clearAllFilters()" title="Supprimer tous les filtres">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="filters-body">
+        <div class="filter-row">
+          <div class="search-group">
+            <label for="searchTerm">
+              <i class="fas fa-search"></i>
+              Recherche Globale
+            </label>
+            <div class="search-input-container">
+              <input type="text"
+                     id="searchTerm"
+                     placeholder="Rechercher par ID, client, montant..."
+                     [ngModel]="searchTerm"
+                     (ngModelChange)="onSearchChange($event)"
+                     class="search-input">
+              <button *ngIf="searchTerm"
+                      class="clear-search-btn"
+                      (click)="searchTerm = ''; onSearchChange('')"
+                      title="Effacer la recherche">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="client-filter-group">
+            <label for="clientFilter">
+              <i class="fas fa-user"></i>
+              Filtrer par Client
+            </label>
+            <input type="text"
+                   id="clientFilter"
+                   placeholder="Nom du client..."
+                   [ngModel]="clientFilter"
+                   (ngModelChange)="onClientFilterChange($event)"
+                   class="client-input">
+          </div>
+
+          <div class="date-filter-group">
+            <label for="dateFilter">
+              <i class="fas fa-calendar"></i>
+              Filtrer par Date
+            </label>
+            <input type="date"
+                   id="dateFilter"
+                   [ngModel]="dateFilter"
+                   (ngModelChange)="onDateFilterChange($event)"
+                   class="date-input">
+          </div>
+
+          <div class="filter-actions">
+            <button class="clear-btn" (click)="clearAllFilters()" title="Effacer tous les filtres">
+              <i class="fas fa-times"></i>
+              Effacer Tout
+            </button>
+            <button class="refresh-btn" (click)="loadFactures()" title="Actualiser les données">
+              <i class="fas fa-sync-alt"></i>
+              Actualiser
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enhanced Table -->
+    <div class="table-container">
+      <div class="table-header">
+        <h3>
+          <i class="fas fa-table"></i>
+          Liste des Factures
+        </h3>
+        <div class="table-info">
+          <span class="badge primary-badge">{{ filteredFactures.length }} facture(s)</span>
+          <span class="results-info" *ngIf="filteredFactures.length !== factures.length">
+            sur {{ factures.length }} total
+          </span>
+        </div>
+      </div>
+
+      <div *ngIf="isLoading" class="loading-spinner">
+        <div class="spinner"></div>
+      </div>
+
+      <div class="table-wrapper">
+        <table *ngIf="!isLoading">
+          <thead>
+            <tr>
+              <th class="sortable" (click)="toggleSort('id')">
+                Numéro
+                <i class="fas"
+                   [class.fa-sort]="sortBy !== 'id'"
+                   [class.fa-sort-up]="sortBy === 'id' && sortDirection === 'asc'"
+                   [class.fa-sort-down]="sortBy === 'id' && sortDirection === 'desc'"></i>
+              </th>
+              <th class="sortable" (click)="toggleSort('client')">
+                Client
+                <i class="fas"
+                   [class.fa-sort]="sortBy !== 'client'"
+                   [class.fa-sort-up]="sortBy === 'client' && sortDirection === 'asc'"
+                   [class.fa-sort-down]="sortBy === 'client' && sortDirection === 'desc'"></i>
+              </th>
+              <th class="sortable" (click)="toggleSort('dateFacture')">
+                Date Facture
+                <i class="fas"
+                   [class.fa-sort]="sortBy !== 'dateFacture'"
+                   [class.fa-sort-up]="sortBy === 'dateFacture' && sortDirection === 'asc'"
+                   [class.fa-sort-down]="sortBy === 'dateFacture' && sortDirection === 'desc'"></i>
+              </th>
+              <th>Montant HT</th>
+              <th>Montant TVA</th>
+              <th class="sortable" (click)="toggleSort('montantTTC')">
+                Montant TTC
+                <i class="fas"
+                   [class.fa-sort]="sortBy !== 'montantTTC'"
+                   [class.fa-sort-up]="sortBy === 'montantTTC' && sortDirection === 'asc'"
+                   [class.fa-sort-down]="sortBy === 'montantTTC' && sortDirection === 'desc'"></i>
+              </th>
+              <th class="sortable" (click)="toggleSort('paymentStatus')">
+                Statut Paiement
+                <i class="fas"
+                   [class.fa-sort]="sortBy !== 'paymentStatus'"
+                   [class.fa-sort-up]="sortBy === 'paymentStatus' && sortDirection === 'asc'"
+                   [class.fa-sort-down]="sortBy === 'paymentStatus' && sortDirection === 'desc'"></i>
+              </th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let f of paginatedFactures; let i = index"
+                [class.highlighted]="i % 2 === 0"
+                [class.overdue]="isOverdue(f)">
+              <td class="id-cell">
+                <span class="id-value">{{ f.id }}</span>
+                <span class="overdue-indicator" *ngIf="isOverdue(f)" title="Facture en retard de paiement">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </span>
+              </td>
+              <td class="client-cell">
+                <div class="client-info">
+                  <span class="client-name">{{ f.client?.nom }} {{ f.client?.prenom }}</span>
+                  <span class="client-email" *ngIf="f.client?.email">{{ f.client?.email }}</span>
+                </div>
+              </td>
+              <td class="date-cell">
+                <div class="date-info">
+                  <i class="fas fa-calendar"></i>
+                  <span class="date-value">{{ f.dateFacture | date:'dd/MM/yyyy' }}</span>
+                </div>
+              </td>
+              <td class="amount-cell">
+                <span class="amount-ht">{{ f.montantHT | number:'1.2-2' }} DT</span>
+              </td>
+              <td class="amount-cell">
+                <span class="amount-tva">{{ f.montantTVA | number:'1.2-2' }} DT</span>
+              </td>
+              <td class="amount-cell">
+                <span class="amount-ttc">{{ f.montantTTC | number:'1.2-2' }} DT</span>
+              </td>
+              <td class="status-cell">
+                <div class="payment-status-container">
+                  <span class="payment-status" [ngClass]="getPaymentStatusClass(f)">
+                    <i class="fas"
+                       [class.fa-times-circle]="getPaymentStatusText(f) === 'Non payée'"
+                       [class.fa-check-circle]="getPaymentStatusText(f) === 'Payée'"
+                       [class.fa-hourglass-half]="getPaymentStatusText(f) === 'Partiellement payée'"></i>
+                    {{ getPaymentStatusText(f) }}
+                  </span>
+                  <div class="payment-details">
+                    <span class="amount-paid">{{ getAmountPaid(f) | number:'1.2-2' }} DT payé</span>
+                    <span class="amount-remaining" *ngIf="getRemainingAmount(f) > 0">
+                      {{ getRemainingAmount(f) | number:'1.2-2' }} DT restant
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td class="actions">
+                <button class="view-btn" (click)="viewFacture(f)" title="Voir détails">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button class="payment-btn" (click)="openPaymentModal(f)"
+                        *ngIf="!isFactureFullyPaid(f)" title="Effectuer un paiement">
+                  <i class="fas fa-credit-card"></i>
+                </button>
+                <button class="history-btn" (click)="viewPaymentHistory(f)" title="Historique des paiements">
+                  <i class="fas fa-history"></i>
+                </button>
+                <button class="delete-btn" (click)="openDeleteModal(f)" title="Supprimer">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination" *ngIf="totalPages > 1">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">&laquo;</button>
+        <button *ngFor="let page of [].constructor(totalPages); let i = index" 
+                (click)="goToPage(i+1)" 
+                [class.active]="currentPage === (i+1)">{{ i+1 }}</button>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">&raquo;</button>
+      </div>
+    </div>
+
+    <!-- Enhanced View Modal -->
+    <div class="modal-backdrop" *ngIf="showViewModal" (click)="closeViewModal()"></div>
+    <div class="modal view-modal" *ngIf="showViewModal">
+      <div class="modal-content view-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h3>
+            <i class="fas fa-file-invoice-dollar"></i>
+            Détails de la Facture
+          </h3>
+          <button class="close-btn" (click)="closeViewModal()" title="Fermer">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="facture-details" *ngIf="selectedFacture">
+          <div class="detail-section">
+            <h4>
+              <i class="fas fa-info-circle"></i>
+              Informations Générales
+            </h4>
+            <div class="detail-grid">
+              <div class="detail-item">
+                <label>Numéro de facture:</label>
+                <span class="facture-number">{{ selectedFacture.id }}</span>
+              </div>
+              <div class="detail-item">
+                <label>Date de facturation:</label>
+                <span class="date-value">
+                  <i class="fas fa-calendar-plus"></i>
+                  {{ selectedFacture.dateFacture | date:'dd/MM/yyyy' }}
+                </span>
+              </div>
+              <div class="detail-item">
+                <label>Statut de paiement:</label>
+                <span class="payment-status" [ngClass]="getPaymentStatusClass(selectedFacture)">
+                  <i class="fas"
+                     [class.fa-times-circle]="getPaymentStatusText(selectedFacture) === 'Non payée'"
+                     [class.fa-check-circle]="getPaymentStatusText(selectedFacture) === 'Payée'"
+                     [class.fa-hourglass-half]="getPaymentStatusText(selectedFacture) === 'Partiellement payée'"></i>
+                  {{ getPaymentStatusText(selectedFacture) }}
+                </span>
+              </div>
+              <div class="detail-item" *ngIf="isOverdue(selectedFacture)">
+                <label>Statut:</label>
+                <span class="overdue-status">
+                  <i class="fas fa-exclamation-triangle"></i>
+                  Facture en retard
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-section" *ngIf="selectedFacture.client">
+            <h4>
+              <i class="fas fa-user"></i>
+              Informations Client
+            </h4>
+            <div class="detail-grid">
+              <div class="detail-item">
+                <label>Nom complet:</label>
+                <span class="client-name">{{ selectedFacture.client.nom }} {{ selectedFacture.client.prenom }}</span>
+              </div>
+              <div class="detail-item" *ngIf="selectedFacture.client.email">
+                <label>Email:</label>
+                <span class="client-email">
+                  <i class="fas fa-envelope"></i>
+                  {{ selectedFacture.client.email }}
+                </span>
+              </div>
+              <div class="detail-item" *ngIf="selectedFacture.client.telephone">
+                <label>Téléphone:</label>
+                <span class="client-phone">
+                  <i class="fas fa-phone"></i>
+                  {{ selectedFacture.client.telephone }}
+                </span>
+              </div>
+              <div class="detail-item" *ngIf="selectedFacture.client.adresse">
+                <label>Adresse:</label>
+                <span class="client-address">
+                  <i class="fas fa-map-marker-alt"></i>
+                  {{ selectedFacture.client.adresse }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-section" *ngIf="selectedFacture.facturelignes && selectedFacture.facturelignes.length > 0">
+            <h4>
+              <i class="fas fa-list"></i>
+              Lignes de Facture
+            </h4>
+            <div class="lignes-table-container">
+              <table class="lignes-table">
+                <thead>
+                  <tr>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    <th>Prix Unitaire</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let ligne of selectedFacture.facturelignes">
+                    <td class="product-cell">{{ ligne.produit?.nom || 'Produit supprimé' }}</td>
+                    <td class="quantity-cell">{{ ligne.quantite }}</td>
+                    <td class="price-cell">{{ ligne.prix | number:'1.2-2' }} DT</td>
+                    <td class="total-cell">{{ (ligne.prix * ligne.quantite) | number:'1.2-2' }} DT</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="detail-section">
+            <h4>
+              <i class="fas fa-calculator"></i>
+              Récapitulatif Financier
+            </h4>
+            <div class="totals-grid">
+              <div class="total-item">
+                <label>Montant HT:</label>
+                <span class="total-value">{{ selectedFacture.montantHT | number:'1.2-2' }} DT</span>
+              </div>
+              <div class="total-item">
+                <label>TVA:</label>
+                <span class="tva-value">{{ selectedFacture.montantTVA | number:'1.2-2' }} DT</span>
+              </div>
+              <div class="total-item final-total">
+                <label>Montant TTC:</label>
+                <span class="final-value">{{ selectedFacture.montantTTC | number:'1.2-2' }} DT</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-section">
+            <h4>
+              <i class="fas fa-credit-card"></i>
+              Informations de Paiement
+            </h4>
+            <div class="payment-summary">
+              <div class="payment-item">
+                <label>Montant payé:</label>
+                <span class="paid-amount">{{ getAmountPaid(selectedFacture) | number:'1.2-2' }} DT</span>
+              </div>
+              <div class="payment-item" *ngIf="getRemainingAmount(selectedFacture) > 0">
+                <label>Montant restant:</label>
+                <span class="remaining-amount">{{ getRemainingAmount(selectedFacture) | number:'1.2-2' }} DT</span>
+              </div>
+              <div class="payment-item">
+                <label>Pourcentage payé:</label>
+                <span class="payment-percentage">
+                  {{ ((getAmountPaid(selectedFacture) / selectedFacture.montantTTC) * 100) | number:'1.0-0' }}%
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="modal-cancel" (click)="closeViewModal()">
+            <i class="fas fa-times"></i>
+            Fermer
+          </button>
+          <button type="button" class="modal-validate" (click)="openPaymentModal(selectedFacture!); closeViewModal()" *ngIf="!isFactureFullyPaid(selectedFacture!)">
+            <i class="fas fa-credit-card"></i>
+            Effectuer un Paiement
+          </button>
+          <button type="button" class="modal-info" (click)="viewPaymentHistory(selectedFacture!); closeViewModal()">
+            <i class="fas fa-history"></i>
+            Historique
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal" *ngIf="showPaymentModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">
+            <i class="bi bi-credit-card"></i>
+            <span>Effectuer un paiement</span>
+          </div>
+          <button class="close-btn" (click)="closePaymentModal()">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="payment-form" *ngIf="selectedFacture">
+            <div class="invoice-summary">
+              <h4>Facture #{{ selectedFacture.id }}</h4>
+              <p><strong>Client:</strong> {{ selectedFacture.client?.nom }} {{ selectedFacture.client?.prenom }}</p>
+              <p><strong>Montant total:</strong> {{ selectedFacture.montantTTC | number:'1.2-2' }} Dt</p>
+              <p><strong>Montant payé:</strong> {{ getAmountPaid(selectedFacture) | number:'1.2-2' }} Dt</p>
+              <p><strong>Montant restant:</strong> {{ getRemainingAmount(selectedFacture) | number:'1.2-2' }} Dt</p>
+            </div>
+
+            <form #paymentForm="ngForm" (ngSubmit)="onPaymentSubmit()">
+              <div class="form-group">
+                <label for="montantPaye">Montant à payer *</label>
+                <input type="number"
+                       id="montantPaye"
+                       name="montantPaye"
+                       [(ngModel)]="paymentData.montantPaye"
+                       step="0.01"
+                       min="0.01"
+                       [max]="getRemainingAmount(selectedFacture)"
+                       placeholder="0.00"
+                       required>
+              </div>
+
+              <div class="form-group">
+                <label for="modeReglement">Mode de paiement *</label>
+                <select id="modeReglement"
+                        name="modeReglement"
+                        [(ngModel)]="paymentData.modeReglement"
+                        required>
+                  <option value="">Sélectionner un mode</option>
+                  <option value="CARTE">Carte bancaire</option>
+                  <option value="VIREMENT">Virement</option>
+                  <option value="ESPECES">Espèces</option>
+                  <option value="CHEQUE">Chèque</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="reference">Référence *</label>
+                <input type="text"
+                       id="reference"
+                       name="reference"
+                       [(ngModel)]="paymentData.reference"
+                       placeholder="Référence du paiement"
+                       required>
+              </div>
+
+              <div class="form-group">
+                <label for="commentaire">Commentaire</label>
+                <textarea id="commentaire"
+                          name="commentaire"
+                          [(ngModel)]="paymentData.commentaire"
+                          rows="3"
+                          placeholder="Commentaire optionnel..."></textarea>
+              </div>
+
+              <div class="form-actions">
+                <button type="button" class="cancel-btn" (click)="closePaymentModal()">
+                  Annuler
+                </button>
+                <button type="submit" class="submit-btn" [disabled]="!paymentForm.valid || isProcessingPayment">
+                  <span *ngIf="isProcessingPayment">Traitement...</span>
+                  <span *ngIf="!isProcessingPayment">Effectuer le paiement</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment History Modal -->
+    <div class="modal" *ngIf="showPaymentHistoryModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">
+            <i class="bi bi-clock-history"></i>
+            <span>Historique des paiements</span>
+          </div>
+          <button class="close-btn" (click)="closePaymentHistoryModal()">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="payment-history" *ngIf="selectedFacture">
+            <h4>Facture #{{ selectedFacture.id }}</h4>
+            <div *ngIf="paymentHistory.length === 0" class="no-payments">
+              <p>Aucun paiement effectué pour cette facture.</p>
+            </div>
+            <div *ngIf="paymentHistory.length > 0" class="payments-list">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Montant</th>
+                    <th>Mode</th>
+                    <th>Référence</th>
+                    <th>Commentaire</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let payment of paymentHistory">
+                    <td>{{ payment.dateReglement | date:'dd/MM/yyyy HH:mm' }}</td>
+                    <td>{{ payment.montantPaye | number:'1.2-2' }} Dt</td>
+                    <td>{{ formatPaymentMode(payment.modeReglement) }}</td>
+                    <td>{{ payment.reference }}</td>
+                    <td>{{ payment.commentaire || '-' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" *ngIf="showDeleteModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Confirmer la suppression</h3>
+          <button class="close-btn" (click)="closeDeleteModal()">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Êtes-vous sûr de vouloir supprimer cette facture ?</p>
+          <div class="form-actions">
+            <button class="submit-btn" (click)="onDelete()">
+              Confirmer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

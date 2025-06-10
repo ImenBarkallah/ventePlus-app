@@ -1,0 +1,652 @@
+<div class="container mt-4">
+  <!-- Alert -->
+  <div *ngIf="showAlert" class="alert" [ngClass]="alertType" (click)="closeAlert()">
+    {{ alertMessage }}
+  </div>
+
+  <div class="category-container">
+    <!-- Enhanced Header -->
+    <div class="header">
+      <div class="header-left">
+        <h2>
+          <i class="fas fa-file-invoice"></i>
+          Gestion des Devis
+        </h2>
+        <p class="subtitle">Gérez vos devis et suivez leur statut</p>
+      </div>
+      <div class="header-actions">
+        <button class="export-pdf-btn" (click)="exportToPdf()" title="Exporter en PDF">
+          <i class="fas fa-file-pdf"></i>
+          <span>PDF</span>
+        </button>
+        <button class="export-excel-btn" (click)="exportToExcel()" title="Exporter en Excel">
+          <i class="fas fa-file-excel"></i>
+          <span>Excel</span>
+        </button>
+        <button class="add-button" (click)="openModal()" title="Nouveau devis">
+          <i class="fas fa-plus"></i>
+          <span>Nouveau Devis</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Enhanced Stats Dashboard -->
+    <div class="stats-container">
+      <div class="stat-card total-devis" (click)="applyStatusFilter('all')">
+        <div class="stat-icon">
+          <i class="fas fa-file-invoice"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ devisStats.total }}</h3>
+          <p>Total Devis</p>
+          <span class="stat-trend">
+            <i class="fas fa-chart-line"></i>
+            Tous les devis
+          </span>
+        </div>
+      </div>
+
+      <div class="stat-card pending-devis" (click)="applyStatusFilter('EN_ATTENTE')">
+        <div class="stat-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ devisStats.enAttente }}</h3>
+          <p>En Attente</p>
+          <span class="stat-trend">
+            <i class="fas fa-hourglass-half"></i>
+            À traiter
+          </span>
+        </div>
+      </div>
+
+      <div class="stat-card validated-devis" (click)="applyStatusFilter('VALIDE')">
+        <div class="stat-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ devisStats.valides }}</h3>
+          <p>Validés</p>
+          <span class="stat-trend">
+            <i class="fas fa-thumbs-up"></i>
+            Approuvés
+          </span>
+        </div>
+      </div>
+
+      <div class="stat-card cancelled-devis" (click)="applyStatusFilter('ANNULE')">
+        <div class="stat-icon">
+          <i class="fas fa-times-circle"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ devisStats.annules }}</h3>
+          <p>Annulés</p>
+          <span class="stat-trend">
+            <i class="fas fa-ban"></i>
+            Refusés
+          </span>
+        </div>
+      </div>
+
+      <div class="stat-card total-value">
+        <div class="stat-icon">
+          <i class="fas fa-coins"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ devisStats.totalValue | number:'1.0-0' }} DT</h3>
+          <p>Valeur Totale</p>
+          <span class="stat-trend">
+            <i class="fas fa-calculator"></i>
+            Chiffre d'affaires
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enhanced Filters & Search -->
+    <div class="filters-container">
+      <div class="filters-header">
+        <h3>
+          <i class="fas fa-filter"></i>
+          Filtres & Recherche
+        </h3>
+        <div class="filter-status" *ngIf="selectedFilter !== 'all' || clientFilter || dateFilter">
+          <span class="active-filter" *ngIf="selectedFilter !== 'all'">
+            Statut: {{ getStatutLabel(selectedFilter) }}
+          </span>
+          <span class="active-filter" *ngIf="clientFilter">
+            Client: {{ clientFilter }}
+          </span>
+          <span class="active-filter" *ngIf="dateFilter">
+            Date: {{ dateFilter }}
+          </span>
+          <button class="clear-filter-btn" (click)="clearAllFilters()" title="Supprimer tous les filtres">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="filters-body">
+        <div class="filter-row">
+          <div class="search-group">
+            <label for="searchTerm">
+              <i class="fas fa-search"></i>
+              Recherche Globale
+            </label>
+            <div class="search-input-container">
+              <input type="text"
+                     id="searchTerm"
+                     placeholder="Rechercher par numéro, client..."
+                     [ngModel]="searchTerm"
+                     (ngModelChange)="onSearchChange($event)"
+                     class="search-input">
+              <button *ngIf="searchTerm"
+                      class="clear-search-btn"
+                      (click)="searchTerm = ''; onSearchChange('')"
+                      title="Effacer la recherche">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="client-filter-group">
+            <label for="clientFilter">
+              <i class="fas fa-user"></i>
+              Filtrer par Client
+            </label>
+            <input type="text"
+                   id="clientFilter"
+                   placeholder="Nom du client..."
+                   [ngModel]="clientFilter"
+                   (ngModelChange)="onClientFilterChange($event)"
+                   class="client-input">
+          </div>
+
+          <div class="status-filter-group">
+            <label for="statusFilter">
+              <i class="fas fa-flag"></i>
+              Filtrer par Statut
+            </label>
+            <select id="statusFilter"
+                    [ngModel]="statutFilter"
+                    (ngModelChange)="onStatutFilterChange($event)"
+                    class="status-select">
+              <option value="">Tous les statuts</option>
+              <option value="EN_ATTENTE">En Attente</option>
+              <option value="VALIDE">Validé</option>
+              <option value="ANNULE">Annulé</option>
+              <option value="CONVERTI">Converti</option>
+            </select>
+          </div>
+
+          <div class="date-filter-group">
+            <label for="dateFilter">
+              <i class="fas fa-calendar"></i>
+              Filtrer par Date
+            </label>
+            <input type="date"
+                   id="dateFilter"
+                   [ngModel]="dateFilter"
+                   (ngModelChange)="onDateFilterChange($event)"
+                   class="date-input">
+          </div>
+
+          <div class="filter-actions">
+            <button class="clear-btn" (click)="clearAllFilters()" title="Effacer tous les filtres">
+              <i class="fas fa-times"></i>
+              Effacer Tout
+            </button>
+            <button class="refresh-btn" (click)="loadClientsAndDevis()" title="Actualiser les données">
+              <i class="fas fa-sync-alt"></i>
+              Actualiser
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enhanced Table -->
+    <div class="table-container">
+      <div class="table-header">
+        <h3>
+          <i class="fas fa-table"></i>
+          Liste des Devis
+        </h3>
+        <div class="table-info">
+          <span class="badge primary-badge">{{ filteredDevis.length }} devis</span>
+          <span class="results-info" *ngIf="filteredDevis.length !== devis.length">
+            sur {{ devis.length }} total
+          </span>
+        </div>
+      </div>
+
+      <div *ngIf="isLoading" class="loading-spinner">
+        <div class="spinner"></div>
+      </div>
+
+      <div class="table-wrapper">
+        <table *ngIf="!isLoading">
+          <thead>
+            <tr>
+              <th class="sortable" (click)="toggleSort('numeroDevis')">
+                Numéro
+                <i class="fas"
+                   [class.fa-sort]="sortBy !== 'numeroDevis'"
+                   [class.fa-sort-up]="sortBy === 'numeroDevis' && sortDirection === 'asc'"
+                   [class.fa-sort-down]="sortBy === 'numeroDevis' && sortDirection === 'desc'"></i>
+              </th>
+              <th class="sortable" (click)="toggleSort('client')">
+                Client
+                <i class="fas"
+                   [class.fa-sort]="sortBy !== 'client'"
+                   [class.fa-sort-up]="sortBy === 'client' && sortDirection === 'asc'"
+                   [class.fa-sort-down]="sortBy === 'client' && sortDirection === 'desc'"></i>
+              </th>
+              <th class="sortable" (click)="toggleSort('dateDevis')">
+                Date Devis
+                <i class="fas"
+                   [class.fa-sort]="sortBy !== 'dateDevis'"
+                   [class.fa-sort-up]="sortBy === 'dateDevis' && sortDirection === 'asc'"
+                   [class.fa-sort-down]="sortBy === 'dateDevis' && sortDirection === 'desc'"></i>
+              </th>
+              <th class="sortable" (click)="toggleSort('dateValidite')">
+                Date Validité
+                <i class="fas"
+                   [class.fa-sort]="sortBy !== 'dateValidite'"
+                   [class.fa-sort-up]="sortBy === 'dateValidite' && sortDirection === 'asc'"
+                   [class.fa-sort-down]="sortBy === 'dateValidite' && sortDirection === 'desc'"></i>
+              </th>
+              <th class="sortable" (click)="toggleSort('montantTTC')">
+                Montant TTC
+                <i class="fas"
+                   [class.fa-sort]="sortBy !== 'montantTTC'"
+                   [class.fa-sort-up]="sortBy === 'montantTTC' && sortDirection === 'asc'"
+                   [class.fa-sort-down]="sortBy === 'montantTTC' && sortDirection === 'desc'"></i>
+              </th>
+              <th class="sortable" (click)="toggleSort('statut')">
+                Statut
+                <i class="fas"
+                   [class.fa-sort]="sortBy !== 'statut'"
+                   [class.fa-sort-up]="sortBy === 'statut' && sortDirection === 'asc'"
+                   [class.fa-sort-down]="sortBy === 'statut' && sortDirection === 'desc'"></i>
+              </th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let d of paginatedDevis; let i = index"
+                [class.highlighted]="i % 2 === 0"
+                [class.expired]="isExpired(d)">
+              <td class="numero-cell">
+                <span class="numero-value">{{ d.numeroDevis || 'N/A' }}</span>
+                <span class="expired-indicator" *ngIf="isExpired(d)" title="Devis expiré">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </span>
+              </td>
+              <td class="client-cell">
+                <div class="client-info">
+                  <span class="client-name">{{ d.client?.nom }} {{ d.client?.prenom }}</span>
+                  <span class="client-email" *ngIf="d.client?.email">{{ d.client.email }}</span>
+                </div>
+              </td>
+              <td class="date-cell">
+                <div class="date-info">
+                  <i class="fas fa-calendar"></i>
+                  <span class="date-value">{{ d.dateDevis | date:'dd/MM/yyyy' }}</span>
+                </div>
+              </td>
+              <td class="date-cell">
+                <div class="date-info" [class.expired]="isExpired(d)">
+                  <i class="fas fa-calendar-check"></i>
+                  <span class="date-value">{{ d.dateValidite | date:'dd/MM/yyyy' }}</span>
+                </div>
+              </td>
+              <td class="amount-cell">
+                <span class="amount-value">{{ d.montantTTC | number:'1.2-2' }} DT</span>
+              </td>
+              <td class="status-cell">
+                <span class="status-badge" [ngClass]="getStatutClass(d.statut)">
+                  <i class="fas"
+                     [class.fa-clock]="d.statut === 'EN_ATTENTE'"
+                     [class.fa-check-circle]="d.statut === 'VALIDE'"
+                     [class.fa-times-circle]="d.statut === 'ANNULE'"
+                     [class.fa-exchange-alt]="d.statut === 'CONVERTI'"></i>
+                  {{ getStatutLabel(d.statut) }}
+                </span>
+              </td>
+              <td class="actions">
+                <button class="view-btn" (click)="viewDevis(d)" title="Voir détails">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button class="edit-btn" (click)="openModal(d)" *ngIf="d.statut === 'EN_ATTENTE'" title="Modifier">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="delete-btn" (click)="openDeleteModal(d)" *ngIf="d.statut === 'EN_ATTENTE'" title="Supprimer">
+                  <i class="fas fa-trash"></i>
+                </button>
+                <button class="validate-btn" (click)="onValidate(d)" *ngIf="d.statut === 'EN_ATTENTE'" title="Valider">
+                  <i class="fas fa-check"></i>
+                </button>
+                <button class="cancel-btn" (click)="onCancel(d)" *ngIf="d.statut === 'EN_ATTENTE'" title="Annuler">
+                  <i class="fas fa-times"></i>
+                </button>
+                <button class="convert-btn" (click)="onConvert(d)" *ngIf="d.statut === 'VALIDE'" title="Convertir en facture">
+                  <i class="fas fa-file-invoice"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination" *ngIf="totalPages > 1">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">&laquo;</button>
+        <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="goToPage(i+1)" [class.active]="currentPage === (i+1)">{{ i+1 }}</button>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">&raquo;</button>
+      </div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div class="modal" *ngIf="showModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">
+            <i class="bi bi-file-earmark-plus-fill"></i>
+            <span>{{ isEditing ? 'Modifier le devis' : 'Nouveau devis' }}</span>
+          </div>
+          <button class="close-btn" (click)="closeModal()">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmit()">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label"><i class="bi bi-person"></i> Client</label>
+                <select class="form-control" [ngModel]="selectedDevis?.clientId" (ngModelChange)="selectedDevis!.clientId = $event" name="clientId">
+                  <option *ngFor="let client of clients" [ngValue]="client.id">
+                    {{ client.nom }} {{ client.prenom }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label"><i class="bi bi-calendar-event"></i> Date de validité</label>
+                <input type="date" class="form-control" [ngModel]="selectedDevis?.dateValidite" (ngModelChange)="selectedDevis!.dateValidite = $event" name="dateValidite">
+              </div>
+            </div>
+            <div class="lignes-container">
+              <div class="ligne-card" *ngFor="let ligne of selectedDevis?.lignes; let i = index">
+                <div class="ligne-content">
+                  <div class="form-group">
+                    <label class="form-label"><i class="bi bi-box"></i> Produit</label>
+                    <select class="form-control" [(ngModel)]="ligne.produitId" [name]="'produitId' + i" (ngModelChange)="onProduitChange(i, $event)">
+                      <option *ngFor="let produit of produits" [ngValue]="produit.id">
+                        {{ produit.nom }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label"><i class="bi bi-hash"></i> Quantité</label>
+                    <input type="number" class="form-control" [(ngModel)]="ligne.quantite" [name]="'quantite' + i" min="1" (ngModelChange)="onQuantiteChange(i)">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label"><i class="fas fa-coins"></i> Prix unitaire</label>
+                    <span class="form-control" style="background: #f4f6f9; border: none;">{{ ligne.prixUnitaire | number:'1.3-3' }} DT</span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label"><i class="bi bi-percent"></i> Remise (%)</label>
+                    <input type="number" class="form-control" [(ngModel)]="ligne.remise" [name]="'remise' + i" min="0" max="100" step="0.01" (ngModelChange)="onRemiseChange(i)">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label"><i class="bi bi-cash-coin"></i> TVA (%)</label>
+                    <input type="number" class="form-control" [(ngModel)]="ligne.tva" [name]="'tva' + i" min="0" max="100" step="0.01" (ngModelChange)="onTvaChange(i)">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label"><i class="bi bi-calculator"></i> Total HT</label>
+                    <span class="form-control total-display">{{ getLineTotalHT(ligne) | number:'1.3-3' }} DT</span>
+                  </div>
+                  
+                  <button type="button" class="remove-btn" (click)="removeLigne(i)" title="Supprimer la ligne">
+                    <i class="bi bi-trash-fill"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Global totals section -->
+            <div class="totals-section" *ngIf="selectedDevis && selectedDevis.lignes && selectedDevis.lignes.length > 0">
+              <h4>Totaux</h4>
+              <div class="totals-grid">
+                <div class="form-group">
+                  <label class="form-label"><i class="bi bi-calculator"></i> Total HT</label>
+                  <span class="form-control total-display">{{ selectedDevis.montantHT | number:'1.3-3' }} DT</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label"><i class="bi bi-percent"></i> Remise globale (DT)</label>
+                  <input type="number" class="form-control" [(ngModel)]="selectedDevis.remiseGlobale" name="remiseGlobale" min="0" step="0.01" (ngModelChange)="onRemiseGlobaleChange()">
+                </div>
+                <div class="form-group">
+                  <label class="form-label"><i class="bi bi-calculator"></i> Total après remise</label>
+                  <span class="form-control total-display">{{ getTotalApresRemiseGlobale() | number:'1.3-3' }} DT</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label"><i class="bi bi-cash-coin"></i> TVA</label>
+                  <span class="form-control total-display">{{ selectedDevis.montantTVA | number:'1.3-3' }} DT</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label"><i class="bi bi-receipt"></i> Timbre fiscal (DT)</label>
+                  <input type="number" class="form-control" [(ngModel)]="selectedDevis.timbreFiscal" name="timbreFiscal" min="0" step="0.01" (ngModelChange)="onTimbreFiscalChange()">
+                </div>
+                <div class="form-group total-ttc">
+                  <label class="form-label"><i class="bi bi-currency-dollar"></i> Total TTC</label>
+                  <span class="form-control total-display total-final">{{ selectedDevis.montantTTC | number:'1.3-3' }} DT</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="add-ligne-btn" (click)="addLigne()">
+                <i class="bi bi-plus-lg"></i>
+                Ajouter une ligne
+              </button>
+              <button type="submit" class="submit-btn" [disabled]="isLoading">
+                <span *ngIf="isLoading" class="spinner"></span>
+                {{ isEditing ? 'Mettre à jour' : 'Créer' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enhanced View Modal -->
+    <div class="modal-backdrop" *ngIf="showViewModal" (click)="closeViewModal()"></div>
+    <div class="modal view-modal" *ngIf="showViewModal">
+      <div class="modal-content view-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h3>
+            <i class="fas fa-file-invoice"></i>
+            Détails du Devis
+          </h3>
+          <button class="close-btn" (click)="closeViewModal()" title="Fermer">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="devis-details" *ngIf="selectedDevis">
+          <div class="detail-section">
+            <h4>
+              <i class="fas fa-info-circle"></i>
+              Informations Générales
+            </h4>
+            <div class="detail-grid">
+              <div class="detail-item">
+                <label>Numéro de devis:</label>
+                <span class="numero-value">{{ selectedDevis.numeroDevis || 'Non défini' }}</span>
+              </div>
+              <div class="detail-item">
+                <label>Date de création:</label>
+                <span class="date-value">
+                  <i class="fas fa-calendar-plus"></i>
+                  {{ selectedDevis.dateDevis | date:'dd/MM/yyyy à HH:mm' }}
+                </span>
+              </div>
+              <div class="detail-item">
+                <label>Date de validité:</label>
+                <span class="date-value" [class.expired]="isExpired(selectedDevis)">
+                  <i class="fas fa-calendar-check"></i>
+                  {{ selectedDevis.dateValidite | date:'dd/MM/yyyy' }}
+                  <span class="expired-text" *ngIf="isExpired(selectedDevis)"> (Expiré)</span>
+                </span>
+              </div>
+              <div class="detail-item">
+                <label>Statut:</label>
+                <span class="status-badge" [ngClass]="getStatutClass(selectedDevis.statut)">
+                  <i class="fas"
+                     [class.fa-clock]="selectedDevis.statut === 'EN_ATTENTE'"
+                     [class.fa-check-circle]="selectedDevis.statut === 'VALIDE'"
+                     [class.fa-times-circle]="selectedDevis.statut === 'ANNULE'"
+                     [class.fa-exchange-alt]="selectedDevis.statut === 'CONVERTI'"></i>
+                  {{ getStatutLabel(selectedDevis.statut) }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-section" *ngIf="selectedDevis.client">
+            <h4>
+              <i class="fas fa-user"></i>
+              Informations Client
+            </h4>
+            <div class="detail-grid">
+              <div class="detail-item">
+                <label>Nom complet:</label>
+                <span class="client-name">{{ selectedDevis.client.nom }} {{ selectedDevis.client.prenom }}</span>
+              </div>
+              <div class="detail-item" *ngIf="selectedDevis.client.email">
+                <label>Email:</label>
+                <span class="client-email">
+                  <i class="fas fa-envelope"></i>
+                  {{ selectedDevis.client.email }}
+                </span>
+              </div>
+              <div class="detail-item" *ngIf="selectedDevis.client.telephone">
+                <label>Téléphone:</label>
+                <span class="client-phone">
+                  <i class="fas fa-phone"></i>
+                  {{ selectedDevis.client.telephone }}
+                </span>
+              </div>
+              <div class="detail-item" *ngIf="selectedDevis.client.adresse">
+                <label>Adresse:</label>
+                <span class="client-address">
+                  <i class="fas fa-map-marker-alt"></i>
+                  {{ selectedDevis.client.adresse }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-section" *ngIf="selectedDevis.lignes && selectedDevis.lignes.length > 0">
+            <h4>
+              <i class="fas fa-list"></i>
+              Lignes du Devis
+            </h4>
+            <div class="lignes-table-container">
+              <table class="lignes-table">
+                <thead>
+                  <tr>
+                    <th>Référence</th>
+                    <th>Désignation</th>
+                    <th>Quantité</th>
+                    <th>Prix Unitaire</th>
+                    <th>Remise %</th>
+                    <th>TVA %</th>
+                    <th>Total HT</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let ligne of selectedDevis.lignes">
+                    <td class="reference-cell">{{ ligne.produit?.reference || 'N/A' }}</td>
+                    <td class="designation-cell">{{ ligne.produit?.nom || 'Produit supprimé' }}</td>
+                    <td class="quantity-cell">{{ ligne.quantite }}</td>
+                    <td class="price-cell">{{ ligne.prixUnitaire | number:'1.2-2' }} DT</td>
+                    <td class="discount-cell">{{ ligne.remise || 0 }}%</td>
+                    <td class="tva-cell">{{ ligne.tva || 0 }}%</td>
+                    <td class="total-cell">{{ getLineTotalHT(ligne) | number:'1.2-2' }} DT</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="detail-section">
+            <h4>
+              <i class="fas fa-calculator"></i>
+              Récapitulatif Financier
+            </h4>
+            <div class="totals-grid">
+              <div class="total-item">
+                <label>Total HT:</label>
+                <span class="total-value">{{ selectedDevis.montantHT | number:'1.2-2' }} DT</span>
+              </div>
+              <div class="total-item" *ngIf="selectedDevis.remiseGlobale">
+                <label>Remise globale:</label>
+                <span class="discount-value">-{{ selectedDevis.remiseGlobale | number:'1.2-2' }} DT</span>
+              </div>
+              <div class="total-item">
+                <label>Total après remise:</label>
+                <span class="subtotal-value">{{ getTotalApresRemiseGlobale() | number:'1.2-2' }} DT</span>
+              </div>
+              <div class="total-item">
+                <label>TVA:</label>
+                <span class="tva-value">{{ selectedDevis.montantTVA | number:'1.2-2' }} DT</span>
+              </div>
+              <div class="total-item" *ngIf="selectedDevis.timbreFiscal">
+                <label>Timbre fiscal:</label>
+                <span class="stamp-value">{{ selectedDevis.timbreFiscal | number:'1.2-2' }} DT</span>
+              </div>
+              <div class="total-item final-total">
+                <label>Total TTC:</label>
+                <span class="final-value">{{ selectedDevis.montantTTC | number:'1.2-2' }} DT</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="modal-cancel" (click)="closeViewModal()">
+            <i class="fas fa-times"></i>
+            Fermer
+          </button>
+          <button type="button" class="modal-validate" (click)="openModal(selectedDevis!); closeViewModal()" *ngIf="selectedDevis!.statut === 'EN_ATTENTE'">
+            <i class="fas fa-edit"></i>
+            Modifier
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" *ngIf="showDeleteModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Confirmer la suppression</h3>
+          <button class="close-btn" (click)="closeDeleteModal()">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <p>Êtes-vous sûr de vouloir supprimer ce devis ?</p>
+          <div class="form-actions">
+            <button class="submit-btn" (click)="onDelete()">
+              Confirmer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 

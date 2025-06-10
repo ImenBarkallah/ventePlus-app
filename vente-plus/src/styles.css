@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+:root {
+  --primary-color: #4a6fff;
+  --secondary-color: #5e35b1;
+  --accent-color: #4a6fff;
+  --button-color: #2ecc71;
+  --button-hover: #27ae60;
+  --text-color: #333;
+  --light-text: #777;
+  --background: #f8f9fa;
+  --card-bg: #ffffff;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+app-root {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}

@@ -1,0 +1,517 @@
+<!-- Alerte animée -->
+<div *ngIf="error" class="alert alert-error" (click)="clearError()">
+  <i class="fa-solid fa-exclamation-triangle"></i>
+  {{ error }}
+</div>
+
+<div class="dashboard-container">
+  <!-- Enhanced Dashboard Header -->
+  <div class="header">
+    <div class="header-left">
+      <h2>
+        <i class="fa-solid fa-chart-line"></i>
+        Tableau de Bord
+      </h2>
+      <p class="subtitle">Vue d'ensemble de votre activité</p>
+      <div class="header-stats">
+        <span class="last-update">
+          <i class="fa-solid fa-clock"></i>
+          Dernière mise à jour: {{ lastUpdate | date:'dd/MM/yyyy HH:mm' }}
+        </span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <!-- Time Period Filter -->
+      <div class="period-filter">
+        <label for="timePeriod">Période:</label>
+        <select id="timePeriod" [(ngModel)]="selectedPeriod" (change)="onPeriodChange()" class="period-select">
+          <option value="today">Aujourd'hui</option>
+          <option value="week">Cette semaine</option>
+          <option value="month">Ce mois</option>
+          <option value="quarter">Ce trimestre</option>
+          <option value="year">Cette année</option>
+          <option value="all">Toutes les données</option>
+        </select>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="export-pdf-btn" (click)="exportToPdf()" title="Exporter en PDF">
+          <i class="fa-solid fa-file-pdf"></i>
+          PDF
+        </button>
+        <button class="export-excel-btn" (click)="exportToExcel()" title="Exporter en Excel">
+          <i class="fa-solid fa-file-excel"></i>
+          Excel
+        </button>
+        <button class="refresh-button" (click)="refreshData()" [disabled]="loading" title="Actualiser les données">
+          <i class="fa-solid fa-sync-alt" [class.fa-spin]="loading"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-spinner">
+      <i class="fa-solid fa-spinner fa-spin"></i>
+    </div>
+    <p>Chargement des données du tableau de bord...</p>
+  </div>
+
+<!-- Dashboard Content -->
+<div *ngIf="!loading && !error">
+
+  <!-- Stats Cards -->
+  <div class="stats-container">
+    <!-- Total Revenue Card -->
+    <div class="stat-card revenue-card">
+      <div class="stat-icon revenue-icon">
+        <i class="fa-solid fa-coins"></i>
+      </div>
+      <div class="stat-info">
+        <h3>{{ formatCurrency(stats.totalRevenue) }}</h3>
+        <p>Chiffre d'Affaires Total</p>
+      </div>
+    </div>
+
+    <!-- Total Clients Card -->
+    <div class="stat-card clients-card">
+      <div class="stat-icon clients-icon">
+        <i class="fa-solid fa-users"></i>
+      </div>
+      <div class="stat-info">
+        <h3>{{ stats.totalClients }}</h3>
+        <p>Total Clients</p>
+      </div>
+    </div>
+
+    <!-- Total Invoices Card -->
+    <div class="stat-card invoices-card">
+      <div class="stat-icon invoices-icon">
+        <i class="fa-solid fa-file-invoice"></i>
+      </div>
+      <div class="stat-info">
+        <h3>{{ stats.totalInvoices }}</h3>
+        <p>Total Factures</p>
+      </div>
+    </div>
+
+    <!-- Total Debts Card -->
+    <div class="stat-card debts-card">
+      <div class="stat-icon debts-icon">
+        <i class="fa-solid fa-exclamation-triangle"></i>
+      </div>
+      <div class="stat-info">
+        <h3>{{ formatCurrency(stats.totalDebts) }}</h3>
+        <p>Dettes Totales</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="charts-container">
+    <!-- Revenue Chart -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>
+          <i class="fa-solid fa-chart-bar"></i>
+          Chiffre d'Affaires par Client
+        </h3>
+      </div>
+      <div class="chart-body">
+        <canvas id="revenueChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- Product Chart -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>
+          <i class="fa-solid fa-chart-pie"></i>
+          Produits les Plus Vendus
+        </h3>
+      </div>
+      <div class="chart-body">
+        <canvas id="productChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Second Charts Row -->
+  <div class="charts-container">
+    <!-- Payment Status Chart -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>
+          <i class="fa-solid fa-chart-donut"></i>
+          Statut des Factures
+        </h3>
+      </div>
+      <div class="chart-body">
+        <canvas id="paymentChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- Loyal Clients Chart -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>
+          <i class="fa-solid fa-crown"></i>
+          Clients les Plus Fidèles
+        </h3>
+      </div>
+      <div class="chart-body">
+        <canvas id="clientChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Tables Row -->
+  <div class="tables-container">
+    <!-- Out of Stock Products -->
+    <div class="table-card">
+      <div class="table-header">
+        <h3>
+          <i class="fa-solid fa-box-open"></i>
+          Produits en Rupture de Stock
+        </h3>
+        <span class="badge danger-badge">{{ outOfStockProducts.length }}</span>
+      </div>
+      <div class="table-body">
+        <div *ngIf="outOfStockProducts.length === 0" class="empty-state">
+          <i class="fa-solid fa-check-circle"></i>
+          <p>Aucun produit en rupture de stock</p>
+        </div>
+        <div *ngIf="outOfStockProducts.length > 0" class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Produit</th>
+                <th>Référence</th>
+                <th>Prix</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of outOfStockProducts">
+                <td>{{ product.nom }}</td>
+                <td>{{ product.reference }}</td>
+                <td>{{ formatCurrency(product.prix) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Client Debts -->
+    <div class="table-card">
+      <div class="table-header">
+        <h3>
+          <i class="fa-solid fa-exclamation-triangle"></i>
+          Dettes Clients
+        </h3>
+        <span class="badge warning-badge">{{ getObjectKeys(clientDebts).length }}</span>
+      </div>
+      <div class="table-body">
+        <div *ngIf="getObjectKeys(clientDebts).length === 0" class="empty-state">
+          <i class="fa-solid fa-check-circle"></i>
+          <p>Aucune dette client</p>
+        </div>
+        <div *ngIf="getObjectKeys(clientDebts).length > 0" class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Montant Dû</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let debt of getObjectKeys(clientDebts)">
+                <td>{{ getClientName(debt) }}</td>
+                <td class="debt-amount">{{ formatCurrency(clientDebts[debt]) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unpaid and Partial Invoices Row -->
+  <div class="tables-container">
+    <!-- Unpaid Invoices -->
+    <div class="table-card">
+      <div class="table-header">
+        <h3>
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          Factures Impayées
+        </h3>
+        <span class="badge danger-badge">{{ unpaidInvoices.length }}</span>
+      </div>
+      <div class="table-body">
+        <div *ngIf="unpaidInvoices.length === 0" class="empty-state">
+          <i class="fa-solid fa-check-circle"></i>
+          <p>Aucune facture impayée</p>
+        </div>
+        <div *ngIf="unpaidInvoices.length > 0" class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Facture #</th>
+                <th>Client</th>
+                <th>Montant</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let invoice of unpaidInvoices">
+                <td>{{ invoice.facture.id }}</td>
+                <td>{{ invoice.client.prenom }} {{ invoice.client.nom }}</td>
+                <td class="unpaid-amount">{{ formatCurrency(invoice.facture.montantTTC) }}</td>
+                <td>{{ invoice.facture.dateFacture | date:'short' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Partially Paid Invoices -->
+    <div class="table-card">
+      <div class="table-header">
+        <h3>
+          <i class="fa-solid fa-clock"></i>
+          Factures Partiellement Payées
+        </h3>
+        <span class="badge warning-badge">{{ partiallyPaidInvoices.length }}</span>
+      </div>
+      <div class="table-body">
+        <div *ngIf="partiallyPaidInvoices.length === 0" class="empty-state">
+          <i class="fa-solid fa-check-circle"></i>
+          <p>Aucune facture partiellement payée</p>
+        </div>
+        <div *ngIf="partiallyPaidInvoices.length > 0" class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Facture #</th>
+                <th>Client</th>
+                <th>Payé</th>
+                <th>Restant</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let invoice of partiallyPaidInvoices">
+                <td>{{ invoice.facture.id }}</td>
+                <td>{{ invoice.client.prenom }} {{ invoice.client.nom }}</td>
+                <td class="paid-amount">{{ formatCurrency(invoice.montantPaye) }}</td>
+                <td class="remaining-amount">{{ formatCurrency(invoice.montantRestant) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Additional Analytics Row -->
+  <div class="tables-container">
+    <!-- Best Selling Products -->
+    <div class="table-card">
+      <div class="table-header">
+        <h3>
+          <i class="fa-solid fa-trophy"></i>
+          Produits les Plus Vendus
+        </h3>
+        <span class="badge primary-badge">{{ bestSellingProducts.length }}</span>
+      </div>
+      <div class="table-body">
+        <div *ngIf="bestSellingProducts.length === 0" class="empty-state">
+          <i class="fa-solid fa-box"></i>
+          <p>Aucune donnée de vente</p>
+        </div>
+        <div *ngIf="bestSellingProducts.length > 0" class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Produit</th>
+                <th>Référence</th>
+                <th>Quantité Vendue</th>
+                <th>Prix Unitaire</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of bestSellingProducts">
+                <td>{{ product.produit.nom }}</td>
+                <td>{{ product.produit.reference }}</td>
+                <td class="quantity-sold">{{ product.quantiteVendue }}</td>
+                <td>{{ formatCurrency(product.produit.prix) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Most Loyal Clients -->
+    <div class="table-card">
+      <div class="table-header">
+        <h3>
+          <i class="fa-solid fa-heart"></i>
+          Clients les Plus Fidèles
+        </h3>
+        <span class="badge success-badge">{{ loyalClients.length }}</span>
+      </div>
+      <div class="table-body">
+        <div *ngIf="loyalClients.length === 0" class="empty-state">
+          <i class="fa-solid fa-users"></i>
+          <p>Aucun client fidèle</p>
+        </div>
+        <div *ngIf="loyalClients.length > 0" class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let client of loyalClients">
+                <td>{{ client.prenom }} {{ client.nom }}</td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.telephone }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Clients Analytics Row -->
+  <div class="tables-container">
+    <!-- Top Clients by Revenue -->
+    <div class="table-card">
+      <div class="table-header">
+        <h3>
+          <i class="fa-solid fa-chart-line"></i>
+          Top Clients par CA
+        </h3>
+        <span class="badge success-badge">{{ topClientsByRevenue.length }}</span>
+      </div>
+      <div class="table-body">
+        <div *ngIf="topClientsByRevenue.length === 0" class="empty-state">
+          <i class="fa-solid fa-chart-bar"></i>
+          <p>Aucune donnée de chiffre d'affaires</p>
+        </div>
+        <div *ngIf="topClientsByRevenue.length > 0" class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Chiffre d'Affaires</th>
+                <th>Nb Commandes</th>
+                <th>Montant Moyen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let analytics of topClientsByRevenue">
+                <td>{{ analytics.client.prenom }} {{ analytics.client.nom }}</td>
+                <td class="revenue-amount">{{ formatCurrency(analytics.chiffresAffairesTotal) }}</td>
+                <td>{{ analytics.nombreCommandes }}</td>
+                <td>{{ formatCurrency(analytics.montantMoyenCommande) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Clients by Orders -->
+    <div class="table-card">
+      <div class="table-header">
+        <h3>
+          <i class="fa-solid fa-shopping-cart"></i>
+          Top Clients par Commandes
+        </h3>
+        <span class="badge info-badge">{{ topClientsByOrders.length }}</span>
+      </div>
+      <div class="table-body">
+        <div *ngIf="topClientsByOrders.length === 0" class="empty-state">
+          <i class="fa-solid fa-shopping-bag"></i>
+          <p>Aucune donnée de commandes</p>
+        </div>
+        <div *ngIf="topClientsByOrders.length > 0" class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Nb Commandes</th>
+                <th>Factures Réglées</th>
+                <th>Factures Non Réglées</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let analytics of topClientsByOrders">
+                <td>{{ analytics.client.prenom }} {{ analytics.client.nom }}</td>
+                <td class="orders-count">{{ analytics.nombreCommandes }}</td>
+                <td class="paid-invoices">{{ analytics.nombreFacturesReglees }}</td>
+                <td class="unpaid-invoices">{{ analytics.nombreFacturesNonReglees }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Business Overview Section -->
+  <div *ngIf="businessOverview && getObjectKeys(businessOverview).length > 0" class="stats-container">
+    <!-- Average Order Value -->
+    <div class="stat-card overview-card">
+      <div class="stat-icon overview-icon">
+        <i class="fa-solid fa-calculator"></i>
+      </div>
+      <div class="stat-info">
+        <h3>{{ formatCurrency(businessOverview.averageOrderValue || 0) }}</h3>
+        <p>Valeur Moyenne Commande</p>
+      </div>
+    </div>
+
+    <!-- Total Orders -->
+    <div class="stat-card orders-card">
+      <div class="stat-icon orders-icon">
+        <i class="fa-solid fa-shopping-cart"></i>
+      </div>
+      <div class="stat-info">
+        <h3>{{ businessOverview.totalOrders || 0 }}</h3>
+        <p>Total Commandes</p>
+      </div>
+    </div>
+
+    <!-- Products Sold -->
+    <div class="stat-card products-card">
+      <div class="stat-icon products-icon">
+        <i class="fa-solid fa-box"></i>
+      </div>
+      <div class="stat-info">
+        <h3>{{ businessOverview.totalProductsSold || 0 }}</h3>
+        <p>Produits Vendus</p>
+      </div>
+    </div>
+
+    <!-- Clients with Debts -->
+    <div class="stat-card debts-clients-card">
+      <div class="stat-icon debts-clients-icon">
+        <i class="fa-solid fa-users-slash"></i>
+      </div>
+      <div class="stat-info">
+        <h3>{{ businessOverview.clientsWithDebts || 0 }}</h3>
+        <p>Clients avec Dettes</p>
+      </div>
+    </div>
+  </div>
+
+</div>

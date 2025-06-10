@@ -1,0 +1,26 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">
+      <span>V</span><span class="plus-text-plus">+</span>
+    </div>
+    <h3>Vente <span class="plus-text">Plus</span></h3>
+  </div>
+  
+  <div class="menu-container">
+    <ul class="menu">
+      <li *ngFor="let item of menuItems" [routerLinkActive]="'active'">
+        <a [routerLink]="item.route">
+          <span class="icon" [class]="item.icon"></span>
+          <span class="menu-text">{{ item.name }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="sidebar-footer">
+    <a href="#" class="logout">
+      <span class="icon logout-icon"></span>
+      <span class="menu-text">Déconnexion</span>
+    </a>
+  </div>
+</div>

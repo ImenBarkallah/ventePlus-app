@@ -1,0 +1,19 @@
+<div class="topbar">
+  <div class="user-info">
+    <div class="user-avatar">
+      <i class="user-icon"></i>
+      <span class="status-indicator" [class.online]="user.isOnline"></span>
+    </div>
+    <div class="user-details">
+      <span class="user-name">{{user.firstName}} {{user.lastName}}</span>
+      <span class="user-role">{{user.role}}</span>
+    </div>
+  </div>
+  
+  <div class="actions">
+    <button class="dark-mode-toggle" (click)="toggleDarkMode()" [class.active]="isDarkMode">
+      <i class="moon-icon" *ngIf="!isDarkMode"></i>
+      <i class="sun-icon" *ngIf="isDarkMode"></i>
+    </button>
+  </div>
+</div> 
