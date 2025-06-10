@@ -2,7 +2,6 @@ package org.ms.categorie_service.services;
 
 import org.ms.categorie_service.entities.Categorie;
 import org.ms.categorie_service.repository.CategorieRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

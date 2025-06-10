@@ -14,4 +14,9 @@ public interface ProduitService {
     Produit updateProduitWithImage(Long id, Produit updatedProduit, MultipartFile image);
 
     void deleteProduit(Long id);
+
+    // Stock management methods
+    boolean reduireStock(Long produitId, long quantite);
+    boolean augmenterStock(Long produitId, long quantite);
+    long getStockDisponible(Long produitId);
 }

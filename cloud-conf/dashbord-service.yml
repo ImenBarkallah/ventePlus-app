@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: dashbord-service
+    
+server:
+  port: 8089
+
+# Service specific configuration
+dashboard:
+  service:
+    description: "Dashboard Analytics Service - Data Aggregator"
+    version: "1.0.0"
+    
+# Feign client configuration
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000

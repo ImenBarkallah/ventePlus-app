@@ -218,9 +218,14 @@ public class DevisServiceImpl implements DevisService {
     BigDecimal remiseGlobale = devis.getRemiseGlobale() != null ? devis.getRemiseGlobale() : BigDecimal.ZERO;
     BigDecimal montantApresRemiseGlobale = montantHT.subtract(remiseGlobale);
 
-    // Calculate TVA
-    BigDecimal tauxTVA = devis.getMontantTVA() != null ? devis.getMontantTVA() : BigDecimal.ZERO;
-    BigDecimal montantTVA = montantApresRemiseGlobale.multiply(tauxTVA).divide(BigDecimal.valueOf(100));
+    // Calculate TVA - FIXED: Calculate TVA from line rates, not from devis.getMontantTVA()
+    BigDecimal montantTVA = BigDecimal.ZERO;
+    for (DevisLigne ligne : devis.getLignes()) {
+        BigDecimal tauxTVALigne = ligne.getTva() != null ? ligne.getTva() : BigDecimal.ZERO;
+        BigDecimal montantLigneHT = ligne.getTotalLigne();
+        BigDecimal tveLigne = montantLigneHT.multiply(tauxTVALigne).divide(BigDecimal.valueOf(100));
+        montantTVA = montantTVA.add(tveLigne);
+    }
 
     // Add fiscal stamp
     BigDecimal timbreFiscal = devis.getTimbreFiscal() != null ? devis.getTimbreFiscal() : BigDecimal.ZERO;

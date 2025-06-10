@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: reglement-service
+  datasource:
+    url: jdbc:postgresql://postgres:5432/reglement
+    
+server:
+  port: 8086
+
+# Service specific configuration
+reglement:
+  service:
+    description: "Payment Management Service"
+    version: "1.0.0"

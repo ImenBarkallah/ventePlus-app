@@ -149,4 +149,49 @@ public class ProduitServiceImpl implements ProduitService {
     public void deleteProduit(Long id) {
         produitRepository.deleteById(id);
     }
+
+    @Override
+    public boolean reduireStock(Long produitId, long quantite) {
+        try {
+            Produit produit = produitRepository.findById(produitId)
+                .orElseThrow(() -> new RuntimeException("Produit introuvable avec id : " + produitId));
+
+            if (produit.getQuantite() < quantite) {
+                throw new RuntimeException("Stock insuffisant. Stock disponible: " + produit.getQuantite() + ", demandé: " + quantite);
+            }
+
+            produit.setQuantite(produit.getQuantite() - quantite);
+            produitRepository.save(produit);
+
+            System.out.println("Stock réduit pour produit " + produitId + ": -" + quantite + " (nouveau stock: " + produit.getQuantite() + ")");
+            return true;
+        } catch (Exception e) {
+            System.err.println("Erreur lors de la réduction du stock: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean augmenterStock(Long produitId, long quantite) {
+        try {
+            Produit produit = produitRepository.findById(produitId)
+                .orElseThrow(() -> new RuntimeException("Produit introuvable avec id : " + produitId));
+
+            produit.setQuantite(produit.getQuantite() + quantite);
+            produitRepository.save(produit);
+
+            System.out.println("Stock augmenté pour produit " + produitId + ": +" + quantite + " (nouveau stock: " + produit.getQuantite() + ")");
+            return true;
+        } catch (Exception e) {
+            System.err.println("Erreur lors de l'augmentation du stock: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public long getStockDisponible(Long produitId) {
+        Produit produit = produitRepository.findById(produitId)
+            .orElseThrow(() -> new RuntimeException("Produit introuvable avec id : " + produitId));
+        return produit.getQuantite();
+    }
 }

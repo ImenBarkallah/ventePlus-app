@@ -83,6 +83,22 @@ public class ProduitRestController {
         produitService.deleteProduit(id);
     }
 
+    // Stock management endpoints
+    @PutMapping("/{id}/reduire-stock/{quantite}")
+    public boolean reduireStock(@PathVariable Long id, @PathVariable long quantite) {
+        return produitService.reduireStock(id, quantite);
+    }
+
+    @PutMapping("/{id}/augmenter-stock/{quantite}")
+    public boolean augmenterStock(@PathVariable Long id, @PathVariable long quantite) {
+        return produitService.augmenterStock(id, quantite);
+    }
+
+    @GetMapping("/{id}/stock")
+    public long getStockDisponible(@PathVariable Long id) {
+        return produitService.getStockDisponible(id);
+    }
+
 	@Value("${globalParam}")
 	private int globalParam;
 	@Value("${monParam}")

@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: gatewayservice
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOriginPatterns: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
+            maxAge: 3600
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: dashboard-service
+          uri: lb://DASHBORD-SERVICE
+          predicates:
+            - Path=/dashboard/**
+        - id: client-service
+          uri: lb://CLIENT-SERVICE
+          predicates:
+            - Path=/clients/**
+        - id: produit-service
+          uri: lb://PRODUIT-SERVICE
+          predicates:
+            - Path=/produits/**
+        - id: facture-service
+          uri: lb://FACTURE-SERVICE
+          predicates:
+            - Path=/factures/**
+        - id: reglement-service
+          uri: lb://REGLEMENT-SERVICE
+          predicates:
+            - Path=/reglements/**
+        - id: devis-service
+          uri: lb://DEVIS-SERVICE
+          predicates:
+            - Path=/devis/**
+        - id: categorie-service
+          uri: lb://CATEGORIE-SERVICE
+          predicates:
+            - Path=/categories/**
+
+server:
+  port: 8888
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-service:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      enabled: true

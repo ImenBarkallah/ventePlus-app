@@ -1,0 +1,56 @@
+# Global configuration for all microservices
+spring:
+  application:
+    name: vente-plus-config
+  
+  # Database configuration
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 1023
+    
+  # JPA configuration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        
+  # Actuator configuration
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+    endpoint:
+      health:
+        show-details: always
+        
+# Eureka configuration
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-service:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+
+# Logging configuration
+logging:
+  level:
+    com.venteplus: DEBUG
+    org.springframework.cloud: DEBUG
+    org.springframework.web: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Application configuration
+app:
+  message: "VentePlus Microservices Application"

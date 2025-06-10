@@ -1,0 +1,92 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: client-service
+          uri: lb://client-service
+          predicates:
+            - Path=/client-service/**
+          filters:
+            - StripPrefix=1
+            
+        - id: categorie-service
+          uri: lb://categorie-service
+          predicates:
+            - Path=/categorie-service/**
+          filters:
+            - StripPrefix=1
+            
+        - id: produit-service
+          uri: lb://produit-service
+          predicates:
+            - Path=/produit-service/**
+          filters:
+            - StripPrefix=1
+            
+        - id: devis-service
+          uri: lb://devis-service
+          predicates:
+            - Path=/devis-service/**
+          filters:
+            - StripPrefix=1
+            
+        - id: facture-service
+          uri: lb://facture-service
+          predicates:
+            - Path=/facture-service/**
+          filters:
+            - StripPrefix=1
+            
+        - id: reglement-service
+          uri: lb://reglement-service
+          predicates:
+            - Path=/reglement-service/**
+          filters:
+            - StripPrefix=1
+            
+        - id: dashboard-service
+          uri: lb://dashboard-service
+          predicates:
+            - Path=/dashboard-service/**
+          filters:
+            - StripPrefix=1
+            
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            
+server:
+  port: 8888
+
+# Management endpoints configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+
+# Service specific configuration
+gateway:
+  service:
+    description: "API Gateway Service"
+    version: "1.0.0"
+
+# Global parameter
+globalParam: 100
+
+# Additional parameter
+monParam: 200
+
+# Email parameter
+email: "admin@venteplus.com"

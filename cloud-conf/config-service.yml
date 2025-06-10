@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:/cloud-conf
+        
+server:
+  port: 5555
+
+# Service specific configuration
+config:
+  service:
+    description: "Configuration Server"
+    version: "1.0.0"

@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: client-service
+  datasource:
+    url: jdbc:postgresql://postgres:5432/client
+    
+server:
+  port: 8084
+
+# Service specific configuration
+client:
+  service:
+    description: "Client Management Service"
+    version: "1.0.0"

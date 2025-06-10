@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: devis-service
+  datasource:
+    url: jdbc:postgresql://postgres:5432/devis
+    
+server:
+  port: 8085
+
+# Service specific configuration
+devis:
+  service:
+    description: "Quote Management Service"
+    version: "1.0.0"

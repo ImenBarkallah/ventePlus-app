@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: categorie-service
+  datasource:
+    url: jdbc:postgresql://postgres:5432/categorie
+    
+server:
+  port: 8087
+
+# Service specific configuration
+categorie:
+  service:
+    description: "Category Management Service"
+    version: "1.0.0"
+
+# Cloudinary configuration for image storage
+cloudinary:
+  cloud_name: dwpglwihw
+  api_key: 382737757656489
+  api_secret: EohXmvnC9k8Rp8Edikkao0g1pJg
